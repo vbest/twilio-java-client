@@ -24,34 +24,42 @@ public class TwilioList<E> extends ArrayList<E>
 	{
 		this.page = page;
 	}
+	
 	public Integer getNumberOfPages()
 	{
 		return numberOfPages;
 	}
+	
 	public void setNumberOfPages(Integer numberOfPages)
 	{
 		this.numberOfPages = numberOfPages;
 	}
+	
 	public Integer getPageSize()
 	{
 		return pageSize;
 	}
+	
 	public void setPageSize(Integer pageSize)
 	{
 		this.pageSize = pageSize;
 	}
+	
 	public Integer getTotal()
 	{
 		return total;
 	}
+	
 	public void setTotal(Integer total)
 	{
 		this.total = total;
 	}
+	
 	public Integer getStart()
 	{
 		return start;
 	}
+	
 	public void setStart(Integer start)
 	{
 		this.start = start;
