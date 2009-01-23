@@ -420,6 +420,22 @@ public class Client
 		
 	}
 	
+	public IncomingPhoneNumbers getIncomingPhoneNumbers(String accountSid)
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		
+		
+		TwilioResponse r = sendTwilioRequest("GET", 
+								this.getTwilioEndpoint() 
+									.append("Accounts/")
+									.append(accountSid)
+									.append("/IncomingPhoneNumbers"),
+								params);
+
+		return r.getIncomingPhoneNumbers();
+		
+	}
+	
 	protected List<NameValuePair> buildNameValuePairList(Map<String, String> m)
 	{
 		List<NameValuePair> l = new ArrayList<NameValuePair>();
