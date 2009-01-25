@@ -11,7 +11,7 @@ public class Call
 	private String called;
 	private String caller;
 	private String phoneNumberSid;
-	private String status;
+	private Integer status;
 	private Calendar startTime;
 	private Calendar endTime;
 	private Calendar dateCreated;
@@ -63,14 +63,42 @@ public class Call
 	{
 		this.phoneNumberSid = phoneNumberSid;
 	}
-	public String getStatus()
+	
+	public Integer getStatus()
 	{
 		return status;
 	}
-	public void setStatus(String status)
+	
+	public boolean isNoAnswer()
 	{
-		this.status = status;
+		return CallStatus.isNoAnswer(status);
 	}
+	
+	public boolean isBusy()
+	{
+		return CallStatus.isBusy(status);
+	}
+	
+	public boolean isApplicationError()
+	{
+		return CallStatus.isApplicationError(status);
+	}
+	
+	public boolean isNotYetDialed()
+	{
+		return CallStatus.isNotYetDialed(status);
+	}
+	
+	public boolean isComplete()
+	{
+		return CallStatus.isComplete(status);
+	}
+	
+	public void setStatus(Integer s)
+	{
+		this.status = s;
+	}
+	
 	public Calendar getStartTime()
 	{
 		return startTime;
@@ -142,16 +170,16 @@ public class Call
 		this.callSegmentSid = callSegmentSid;
 	}
 
-	
-	
 	public String getAnnotation()
 	{
 		return annotation;
 	}
+	
 	public void setAnnotation(String annotation)
 	{
 		this.annotation = annotation;
 	}
+	
 	public String toString()
 	{
 		return ToStringBuilder.build(this);
