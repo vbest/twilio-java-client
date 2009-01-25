@@ -89,4 +89,15 @@ public class Account
 		return ToStringBuilder.build(this);
 	}
 
+	public boolean isActive()
+	{
+		if (getStatus() == null)
+		{
+			return false;
+		}
+		else
+		{
+			return getStatus().intValue() == 2;
+		}
+	}
 }
