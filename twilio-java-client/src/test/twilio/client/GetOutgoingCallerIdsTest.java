@@ -2,7 +2,7 @@
 package twilio.client;
 
 /*
- *    /2008-08-01/Accounts/{YourAccountSid}/OutgoingCallerIds
+ *    
  *    
  */
 public class GetOutgoingCallerIdsTest extends AbstractTwilioTest
