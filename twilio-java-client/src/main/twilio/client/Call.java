@@ -186,6 +186,21 @@ public class Call
 	{
 		this.annotation = annotation;
 	}
+
+	public boolean wasInbound()
+	{
+		return CallFlags.callWasInbound(flags);
+	}
+	
+	public boolean wasInitiatedByApi()
+	{
+		return CallFlags.callWasInitiatedByApi(flags);
+	}
+	
+	public boolean wasInitiatedByDialVerb()
+	{
+		return CallFlags.callWasInitiatedByDialVerb(flags);
+	}
 	
 	public String toString()
 	{
