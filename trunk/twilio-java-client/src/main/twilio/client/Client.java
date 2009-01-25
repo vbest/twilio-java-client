@@ -470,4 +470,26 @@ public class Client
 		return r.getOutgoingCallerIds();
 		
 	}
+
+	public Account getAccount(String accountSid)
+	{
+
+		/*
+		 
+		    /2008-08-01/Accounts/{YourAccountSid}
+		     
+		 */
+		
+		Map<String, String> params = new HashMap<String, String>();
+		
+		TwilioResponse r = sendTwilioRequest("GET", 
+								this.getTwilioEndpoint() 
+									.append("Accounts/")
+									.append(accountSid),
+								params);
+
+		return r.getAccount();
+		
+	}
+
 }
