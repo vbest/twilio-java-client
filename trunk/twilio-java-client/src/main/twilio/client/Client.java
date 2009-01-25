@@ -451,6 +451,13 @@ public class Client
 
 	public OutgoingCallerIds getOutgoingCallerIds(String accountSid)
 	{
+
+		/*
+		 
+		    /2008-08-01/Accounts/{YourAccountSid}/OutgoingCallerIds
+		     
+		 */
+		
 		Map<String, String> params = new HashMap<String, String>();
 		
 		TwilioResponse r = sendTwilioRequest("GET", 
