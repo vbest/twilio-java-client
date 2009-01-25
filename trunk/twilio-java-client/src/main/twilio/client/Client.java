@@ -448,4 +448,19 @@ public class Client
 		
 		return l;
 	}
+
+	public OutgoingCallerIds getOutgoingCallerIds(String accountSid)
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		
+		TwilioResponse r = sendTwilioRequest("GET", 
+								this.getTwilioEndpoint() 
+									.append("Accounts/")
+									.append(accountSid)
+									.append("/OutgoingCallerIds"),
+								params);
+
+		return r.getOutgoingCallerIds();
+		
+	}
 }
