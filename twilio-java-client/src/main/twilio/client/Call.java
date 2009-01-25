@@ -103,30 +103,37 @@ public class Call
 	{
 		return startTime;
 	}
+	
 	public void setStartTime(Calendar startTime)
 	{
 		this.startTime = startTime;
 	}
+	
 	public Calendar getEndTime()
 	{
 		return endTime;
 	}
+	
 	public void setEndTime(Calendar endTime)
 	{
 		this.endTime = endTime;
 	}
+	
 	public Integer getDuration()
 	{
 		return duration;
 	}
+	
 	public void setDuration(Integer duration)
 	{
 		this.duration = duration;
 	}
+	
 	public BigDecimal getPrice()
 	{
 		return price;
 	}
+	
 	public void setPrice(BigDecimal price)
 	{
 		this.price = price;
