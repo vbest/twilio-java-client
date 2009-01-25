@@ -1,7 +1,7 @@
 
 package twilio.client;
 
-public enum CallStatus
+public class CallStatus
 {
 	/*
 	 
@@ -15,30 +15,40 @@ public enum CallStatus
 	5 = Failed - No Answer
 	
 	*/
-	NOT_YET_DIALED(0, "Not yet dialed"),
-	IN_PROGRESS(1, "In progress"),
-	COMPLETE(2, "Complete"),
-	FAILED_BUSY(3, "Failed - busy"),
-	FAILED_APPLICATION_ERROR(4, "Failed - application error"),
-	FAILED_NO_ANSWER(5, "No answer");
 	
-	private int code;
-	private String description;
-	
-	CallStatus(int code, String description)
+	static public boolean isNotYetDialed(int code)
 	{
-		this.code = code;
-		this.description = description;
+		return code == 0;
 	}
 	
-	public String getDescription()
+	static public boolean isInProgress(int code)
 	{
-		return this.description;
+		return code == 1;
 	}
-
-	public int getCode()
+	
+	static public boolean isComplete(int code)
 	{
-		return this.code;
+		return code == 2;
+	}
+	
+	static public boolean isFailure(int code)
+	{
+		return isBusy(code) || isApplicationError(code) || isNoAnswer(code);
+	}
+	
+	static public boolean isBusy(int code)
+	{
+		return code == 3;
+	}
+	
+	static public boolean isApplicationError(int code)
+	{
+		return code == 4;
+	}
+	
+	static public boolean isNoAnswer(int code)
+	{
+		return code == 5;
 	}
 	
 }
