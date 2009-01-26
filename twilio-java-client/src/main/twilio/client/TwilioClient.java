@@ -273,11 +273,11 @@ public class TwilioClient
 	 *   @return byte array
 	 *  
 	 */
-	public byte[] getBytesFromUrl(String url)
+	public byte[] getBytesFromUrl(CharSequence url)
 	{
 		try
 		{
-			HttpGet get = new HttpGet(url);
+			HttpGet get = new HttpGet(url.toString());
 			
 			HttpResponse response = this.getHttpClient().execute(get);
 			
@@ -494,4 +494,51 @@ public class TwilioClient
 		
 	}
 
+	public Recordings getRecordings(String accountSid)
+	{
+
+		/*
+		 
+		    /2008-08-01/Accounts/{YourAccountSid}/Recordings
+		     
+		 */
+		
+		Map<String, String> params = new HashMap<String, String>();
+		
+		TwilioResponse r = sendTwilioRequest("GET", 
+								this.getTwilioEndpoint() 
+									.append("Accounts/")
+									.append(accountSid)
+									.append("/Recordings"),
+								params);
+
+		return r.getRecordings();
+		
+	}
+
+	public byte[] getRecordingBytes(String accountSid, String recordingSid)
+	{
+		return getRecordingBytes(accountSid, recordingSid, RecordingFormat.WAV);
+	}
+	
+	public byte[] getRecordingBytes(String accountSid, String recordingSid, RecordingFormat format)
+	{
+
+		/*
+		 
+		    /2008-08-01/Accounts/{YourAccountSid}/Recordings/{RecordingSid}
+		     
+		 */
+		
+		
+		StringBuilder url = this.getTwilioEndpoint() 
+									.append("Accounts/")
+									.append(accountSid)
+									.append("/Recordings/")
+									.append(recordingSid)
+									.append(format.getFileExtension());
+
+		return getBytesFromUrl(url);
+		
+	}
 }
