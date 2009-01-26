@@ -28,14 +28,16 @@ public class TwilioClient
 	private String accountSid;
 	private String authToken;
 	
-	public TwilioClient()
+	public TwilioClient(String accountSid, String authToken)
 	{
-		this(new DefaultHttpClient());
+		this(new DefaultHttpClient(), accountSid, authToken);
 	}
 	
-	public TwilioClient(HttpClient hClient)
+	public TwilioClient(HttpClient hClient, String accountSid, String authToken)
 	{
 		this.httpClient = hClient;
+		
+		setCredentials(accountSid, authToken);
 		
 		setUserAgent("twilio-java-client");
 		setConnectionTimeout( 10 * 1000);
