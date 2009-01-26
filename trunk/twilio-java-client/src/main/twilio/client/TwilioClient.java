@@ -518,7 +518,7 @@ public class TwilioClient
 
 	public byte[] getRecordingBytes(String accountSid, String recordingSid)
 	{
-		return getRecordingBytes(accountSid, recordingSid, RecordingFormat.WAV);
+		return getRecordingBytes(accountSid, recordingSid, RecordingFormat.DEFAULT);
 	}
 	
 	public byte[] getRecordingBytes(String accountSid, String recordingSid, RecordingFormat format)
@@ -541,4 +541,15 @@ public class TwilioClient
 		return getBytesFromUrl(url);
 		
 	}
+
+	public byte[] getRecordingBytes(Recording r, RecordingFormat format)
+	{
+		return getRecordingBytes(r.getAccountSid(), r.getSid(), format);
+	}
+	
+	public byte[] getRecordingBytes(Recording r)
+	{
+		return getRecordingBytes(r.getAccountSid(), r.getSid(), RecordingFormat.DEFAULT);
+	}
+	
 }
