@@ -12,7 +12,7 @@ public class GetAccountTest extends AbstractTwilioTest
 	public void testGetAccount() throws Exception
 	{
 		
-		Client c = getClient();
+		TwilioClient c = getClient();
 	
 		Account account = c.getAccount(getAccountSid()); 
 		

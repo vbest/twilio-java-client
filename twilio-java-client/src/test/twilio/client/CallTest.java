@@ -6,7 +6,7 @@ public class CallTest extends AbstractTwilioTest
 	
 	public void testCall() throws Exception
 	{
-		Client c = getClient();
+		TwilioClient c = getClient();
 	
 		Call call = c.call(getAccountSid(), 
 						getCallFrom(), 

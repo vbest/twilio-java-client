@@ -12,7 +12,7 @@ public class GetOutgoingCallerIdsTest extends AbstractTwilioTest
 	public void testGetOutgoingCallerIds() throws Exception
 	{
 		
-		Client c = getClient();
+		TwilioClient c = getClient();
 	
 		OutgoingCallerIds callerIds = c.getOutgoingCallerIds(getAccountSid()); 
 		
