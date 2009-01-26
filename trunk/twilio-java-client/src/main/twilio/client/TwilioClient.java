@@ -20,7 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
 
-public class Client
+public class TwilioClient
 {
 	private HttpClient httpClient;
 	
@@ -28,12 +28,12 @@ public class Client
 	private String accountSid;
 	private String authToken;
 	
-	public Client()
+	public TwilioClient()
 	{
 		this(new DefaultHttpClient());
 	}
 	
-	public Client(HttpClient hClient)
+	public TwilioClient(HttpClient hClient)
 	{
 		this.httpClient = hClient;
 		

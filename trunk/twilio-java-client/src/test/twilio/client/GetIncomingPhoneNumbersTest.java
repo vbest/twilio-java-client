@@ -7,7 +7,7 @@ public class GetIncomingPhoneNumbersTest extends AbstractTwilioTest
 	
 	public void testGetIncomingPhoneNumbers() throws Exception
 	{
-		Client c = getClient();
+		TwilioClient c = getClient();
 	
 		IncomingPhoneNumbers phoneNumbers = c.getIncomingPhoneNumbers(getAccountSid()); 
 		
