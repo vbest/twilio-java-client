@@ -14,6 +14,8 @@ public class TwilioResponse
 	private ValidationRequest validationRequest;
 	private Calls calls;
 	private Call call;
+	private Recordings recordings;
+	private Recording recording;
 	
 	transient private String xml;
 
@@ -162,6 +164,34 @@ public class TwilioResponse
 	public void setValidationRequest(ValidationRequest validationRequest)
 	{
 		this.validationRequest = validationRequest;
+	}
+
+
+
+	public Recordings getRecordings()
+	{
+		return recordings;
+	}
+
+
+
+	public void setRecordings(Recordings recs)
+	{
+		this.recordings = recs;
+	}
+
+
+
+	public Recording getRecording()
+	{
+		return recording;
+	}
+
+
+
+	public void setRecording(Recording r)
+	{
+		this.recording = r;
 	}
 
 
