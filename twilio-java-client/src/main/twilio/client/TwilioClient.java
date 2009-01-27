@@ -77,6 +77,10 @@ public class TwilioClient
 	}
 	
 	
+	protected TwilioResponse sendTwilioRequest(String httpMethod, CharSequence url) throws TwilioException
+	{
+		return sendTwilioRequest(httpMethod, url, new HashMap<String, String>());
+	}
 	
 	protected TwilioResponse sendTwilioRequest(String httpMethod, CharSequence url, Map<String, String> params) throws TwilioException
 	{
@@ -187,7 +191,7 @@ public class TwilioClient
 		}
 		finally
 		{
-			// todo : 
+			// todo : ???
 		}
 		
 	}
@@ -551,5 +555,20 @@ public class TwilioClient
 	{
 		return getRecordingBytes(r.getAccountSid(), r.getSid(), RecordingFormat.DEFAULT);
 	}
+
+	public void deleteRecording(String recordingSid)
+	{
+		StringBuilder url = this.getTwilioEndpoint() 
+				.append("Accounts/")
+				.append(accountSid)
+				.append("/Recordings/")
+				.append(recordingSid);
+
+		sendTwilioRequest("DELETE", url);
+	}
 	
+	public void deleteRecording(Recording r)
+	{
+		deleteRecording(r.getSid());
+	}
 }
