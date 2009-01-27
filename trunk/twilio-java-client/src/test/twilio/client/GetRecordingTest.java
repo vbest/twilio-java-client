@@ -5,7 +5,7 @@ public class GetRecordingTest extends AbstractTwilioTest
 {
 
 	
-	public void testGetIncomingPhoneNumbers() throws Exception
+	public void testGetRecordings() throws Exception
 	{
 		TwilioClient c = getClient();
 	
