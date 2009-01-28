@@ -20,7 +20,7 @@ public class MarkupTest extends TestCase
 		
 		rsp.add(new Say("Thank you"));
 		
-		String xml = rsp.toString();
+		String xml = rsp.toXml();
 		
 		assertNotNull(xml);
 		
