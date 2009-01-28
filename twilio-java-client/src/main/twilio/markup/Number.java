@@ -1,6 +1,9 @@
 
 package twilio.markup;
 
+import com.thoughtworks.xstream.annotations.*;
+
+@XStreamAlias("Number")
 public class Number extends Noun
 {
 	private String value;
@@ -37,10 +40,5 @@ public class Number extends Noun
 		return sendDigits;
 	}
 	
-	public String toString()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

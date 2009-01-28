@@ -3,11 +3,17 @@ package twilio.markup;
 
 import java.util.*;
 
+import twilio.markup.internal.xstream.XStreamFactory;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 /**
  * 
  *  Twilio markup language (TwiML) response
  *
  */
+@XStreamAlias("Response")
 public class Response
 {
 	private List<Verb> verbs = new ArrayList<Verb>();
@@ -17,21 +23,16 @@ public class Response
 		verbs.add(v);
 	}
 
+	
+	public String toXml()
+	{
+		XStream xstream = XStreamFactory.createXStream();
+		
+		return xstream.toXML(this);
+	}
+	
 	public String toString()
 	{
-		StringBuilder sb = new StringBuilder();
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		sb.append("<Response>\n");
-		
-		for (Verb v : verbs)
-		{
-			sb.append("\n");
-			sb.append(v.toString());
-			sb.append("\n");
-		}
-		
-		sb.append("</Response>\n");
-		
-		return sb.toString();
+		return toXml();
 	}
 }

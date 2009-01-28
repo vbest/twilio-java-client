@@ -1,11 +1,31 @@
 
 package twilio.markup;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.converters.basic.StringConverter;
+import com.thoughtworks.xstream.converters.SingleValueConverterWrapper;
+
+@XStreamAlias("Say")
 public class Say extends Verb
 {
+	@XStreamConverter(StringConverter.class)
+	// @XStreamImplicit
+	// @XStreamAlias("")
 	private String message;
+	
+	@XStreamAsAttribute
+	@XStreamAlias("voice")
 	private Voice voice = Voice.MAN;
+
+	@XStreamAsAttribute
+	@XStreamAlias("language")
 	private Language language = Language.ENGLISH;
+
+	@XStreamAsAttribute
+	@XStreamAlias("loop")
 	private int loop = 1;
 	
 	
@@ -66,39 +86,5 @@ public class Say extends Verb
 		this.loop = loop;
 	}
 
-	@Override
-	public String getName()
-	{
-		return "Say";
-	}
-
-	@Override
-	public String toString()
-	{
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("<Say");
-		
-		if (this.getVoice() != null)
-		{
-			sb.append(" voice=\"" + this.getVoice().getValue() + "\" ");
-		}
-		
-		if (this.getLanguage() != null)
-		{
-			sb.append(" language=\"" + this.getLanguage().getCode() + "\" ");
-		}
-		
-		if (this.getLoop() >= 0)
-		{
-			sb.append(" loop=\"" + this.getLoop() + "\" ");
-		}
-		sb.append(">\n");
-		sb.append(this.getMessage());
-		sb.append("\n</Say>\n");
-		
-		return sb.toString();
-		
-	}
 
 }
