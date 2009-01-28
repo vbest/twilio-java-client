@@ -3,6 +3,9 @@ package twilio.markup;
 
 import java.util.*;
 
+import com.thoughtworks.xstream.annotations.*;
+
+@XStreamAlias("Dial")
 public class Dial extends Verb
 {
 	private String phoneNumber;
@@ -28,11 +31,6 @@ public class Dial extends Verb
 		return phoneNumber;
 	}
 	
-	@Override
-	public String getName()
-	{
-		return "Dial";
-	}
 
 	@Override
 	public String toString()

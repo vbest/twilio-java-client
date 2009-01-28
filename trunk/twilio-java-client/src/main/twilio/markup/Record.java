@@ -1,6 +1,9 @@
 
 package twilio.markup;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("Number")
 public class Record extends Verb
 {
 	private String action;
@@ -8,13 +11,6 @@ public class Record extends Verb
 	private int timeout = -1;
 	private Character finishOnKey = new Character('#');
 	private int maxLength = -1;
-	
-	@Override
-	public String getName()
-	{
-		return "Record";
-	}
-
 	
 	public String getAction()
 	{
