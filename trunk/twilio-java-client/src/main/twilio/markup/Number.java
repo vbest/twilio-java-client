@@ -12,15 +12,15 @@ public class Number extends Noun
 	@XStreamAlias("sendDigits")
 	private String sendDigits;
 	
-	public Number(String value)
+	public Number(CharSequence value)
 	{
 		setValue(value);
 	}
 	
 	
-	public void setValue(String value)
+	public void setValue(CharSequence value)
 	{
-		this.value = value;
+		this.value = value.toString();
 	}
 	
 	public String getValue()
