@@ -9,8 +9,14 @@ import com.thoughtworks.xstream.annotations.*;
 public class Dial extends Verb
 {
 	private String phoneNumber;
+	
 	@XStreamImplicit
 	private List<Number> numbers = new ArrayList<Number>();
+	
+	public Dial()
+	{
+		
+	}
 	
 	public Dial(String phoneNum)
 	{
