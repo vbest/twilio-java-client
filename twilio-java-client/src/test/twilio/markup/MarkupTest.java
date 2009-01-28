@@ -20,6 +20,11 @@ public class MarkupTest extends TestCase
 		
 		rsp.add(new Say("Thank you"));
 		
+		
+		Dial dial = new Dial("+1 503-555-5555");
+		
+		rsp.add(dial);
+		
 		String xml = rsp.toXml();
 		
 		assertNotNull(xml);
