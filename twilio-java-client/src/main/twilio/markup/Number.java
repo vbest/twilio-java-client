@@ -28,11 +28,6 @@ public class Number extends Noun
 		return value;
 	}
 	
-	public String getName()
-	{
-		return "Number";
-	}
-
 	public void setSendDigits(CharSequence s)
 	{
 		sendDigits = s.toString();
