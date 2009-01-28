@@ -2,15 +2,30 @@
 package twilio.markup;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-@XStreamAlias("Number")
+@XStreamAlias("Record")
 public class Record extends Verb
 {
+	@XStreamAlias("action")
+	@XStreamAsAttribute
 	private String action;
+
+	@XStreamAlias("method")
+	@XStreamAsAttribute
 	private String method = "POST";
-	private int timeout = -1;
+	
+	@XStreamAlias("timeout")
+	@XStreamAsAttribute
+	private int timeout = 10;
+	
+	@XStreamAlias("finishOnKey")
+	@XStreamAsAttribute
 	private Character finishOnKey = new Character('#');
-	private int maxLength = -1;
+	
+	@XStreamAlias("maxLength")
+	@XStreamAsAttribute
+	private int maxLength = 5;
 	
 	public String getAction()
 	{

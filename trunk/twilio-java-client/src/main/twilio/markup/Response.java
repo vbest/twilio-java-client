@@ -7,6 +7,7 @@ import twilio.markup.internal.xstream.XStreamFactory;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
  * 
@@ -16,6 +17,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("Response")
 public class Response
 {
+	@XStreamImplicit
 	private List<Verb> verbs = new ArrayList<Verb>();
 	
 	public void add(Verb v)
