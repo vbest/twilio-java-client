@@ -34,14 +34,14 @@ public class Say extends Verb
 		super();
 	}
 	
-	public Say(String msg)
+	public Say(CharSequence msg)
 	{
 		setMessage(msg);
 	}
 	
-	public void setMessage(String msg)
+	public void setMessage(CharSequence msg)
 	{
-		message = msg;
+		message = msg.toString();
 	}
 	
 	public String getMessage()
