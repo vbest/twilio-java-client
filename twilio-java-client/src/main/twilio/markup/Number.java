@@ -7,6 +7,9 @@ import com.thoughtworks.xstream.annotations.*;
 public class Number extends Noun
 {
 	private String value;
+	
+	@XStreamAsAttribute
+	@XStreamAlias("sendDigits")
 	private String sendDigits;
 	
 	public Number(String value)
