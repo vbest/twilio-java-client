@@ -13,15 +13,15 @@ public class Gather extends Verb
 
 	@XStreamAlias("method")
 	@XStreamAsAttribute
-	private String method = "POST";
+	private String httpMethod = Constants.DEFAULT_HTTP_METHOD;
 	
 	@XStreamAlias("timeout")
 	@XStreamAsAttribute
-	private int timeout = 10;
+	private int timeout = Constants.DEFAULT_TIMEOUT;
 	
 	@XStreamAlias("finishOnKey")
 	@XStreamAsAttribute
-	private Character finishOnKey = new Character('#');
+	private Character finishOnKey = Constants.DEFAULT_FINISH_ON_KEY;
 	
 	@XStreamAlias("numDigits")
 	@XStreamAsAttribute
@@ -39,15 +39,15 @@ public class Gather extends Verb
 	}
 
 
-	public String getMethod()
+	public String getHttpMethod()
 	{
-		return method;
+		return httpMethod;
 	}
 
 
-	public void setMethod(String method)
+	public void setHttpMethod(String method)
 	{
-		this.method = method;
+		this.httpMethod = method;
 	}
 
 
