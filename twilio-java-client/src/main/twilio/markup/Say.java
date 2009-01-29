@@ -6,7 +6,6 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import com.thoughtworks.xstream.converters.basic.StringConverter;
-import com.thoughtworks.xstream.converters.SingleValueConverterWrapper;
 
 @XStreamAlias("Say")
 public class Say extends Verb
@@ -66,9 +65,9 @@ public class Say extends Verb
 		return language;
 	}
 
-	public void setLanguage(Language language)
+	public void setLanguage(Language lang)
 	{
-		this.language = language;
+		this.language = lang;
 	}
 
 	public int getLoop()

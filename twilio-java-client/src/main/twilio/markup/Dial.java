@@ -28,7 +28,7 @@ public class Dial extends Verb
 		phoneNumber = phoneNum;
 	}
 
-	public void addNumber(Number n)
+	public void add(Number n)
 	{
 		this.numbers.add(n);
 	}

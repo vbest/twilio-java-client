@@ -1,7 +1,7 @@
 
 package twilio.markup;
 
-public class Noun
+public abstract class Noun
 {
 
 }
