@@ -11,6 +11,7 @@ public class MarkupTest extends TestCase
 
 		Play play = new Play();
 		play.setUrl("http://www.foo.com/music.mp3");
+		play.setLoop(1);
 		
 		rsp.add(play);
 		
@@ -19,7 +20,9 @@ public class MarkupTest extends TestCase
 		
 		Record r = new Record();
 		r.setAction("/foo");
-		r.setMethod("POST");
+		r.setHttpMethod("POST");
+		r.setFinishOnKey('#');
+		r.setMaxLength(60);
 		r.setTimeout(10);
 		
 		rsp.add(r);
@@ -27,7 +30,11 @@ public class MarkupTest extends TestCase
 		rsp.add(new Say("Thank you"));
 		
 		
-		Dial dial = new Dial("+1 503-555-5555");
+		Dial dial = new Dial();
+		
+		Number n = new Number("+1 503-555-5555");
+		
+		dial.add(n);
 		
 		rsp.add(dial);
 		
