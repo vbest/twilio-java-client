@@ -2,9 +2,6 @@
 package twilio.markup.internal.xstream;
 
 import java.lang.reflect.Field;
-import java.util.Iterator;
-
-import twilio.markup.*;
 
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
@@ -32,7 +29,7 @@ public class TwilioConverter
 	public Object unmarshal(HierarchicalStreamReader reader,
 			UnmarshallingContext context)
 	{
-        throw new IllegalStateException("unmarshall not supported");
+        throw new UnsupportedOperationException("unmarshall not supported");
 	}
 
 	public boolean canConvert(Class type)
@@ -66,39 +63,6 @@ public class TwilioConverter
 		
 	}
 
-	/*
-    protected void marshallField(final MarshallingContext context, Object newObj, Field field) {
-    	
-    	if (field.getName().equals(fieldName))
-    	{
-    		System.out.println("word up: " + fieldName);
-    	}
-    	else
-    	{
-    		context.convertAnother(newObj, mapper.getLocalConverter(field.getDeclaringClass(), field.getName()));
-    	} 
-    	
-    }
-    
-    */
-
-    
-	/*
-    protected void marshallField(final MarshallingContext context, Object newObj, Field field) {
-    	
-    	System.out.println(field);
-    	
-    	System.out.println(field.getType());
-    	
-    	if (field.getType() == String.class)
-    	{
-    		
-    	}
-    	else
-    	{
-    		super.marshallField(context, newObj, field);
-    	}
-    } */
 
     static class CustomMapper extends MapperWrapper
     {
