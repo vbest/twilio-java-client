@@ -3,16 +3,10 @@ package twilio.markup;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import com.thoughtworks.xstream.converters.basic.StringConverter;
 
 @XStreamAlias("Say")
 public class Say extends Verb
 {
-	@XStreamConverter(StringConverter.class)
-	// @XStreamImplicit
-	// @XStreamAlias("")
 	private String message;
 	
 	@XStreamAsAttribute
