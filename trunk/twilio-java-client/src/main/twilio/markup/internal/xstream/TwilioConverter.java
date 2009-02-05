@@ -47,11 +47,6 @@ public class TwilioConverter
 		
 		try
 		{
-			Field[] fields = targetClass.getDeclaredFields();
-			for (Field f : fields)
-			{
-				System.out.println("Field: " + f.getName());
-			}
 			
 			Field f = targetClass.getDeclaredField(this.fieldName);
 			
