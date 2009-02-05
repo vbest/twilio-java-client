@@ -3,16 +3,10 @@ package twilio.markup;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import com.thoughtworks.xstream.converters.basic.StringConverter;
-import com.thoughtworks.xstream.converters.SingleValueConverterWrapper;
 
 @XStreamAlias("Play")
 public class Play extends Verb
 {
-	// @XStreamImplicit
-	// @XStreamAlias("")
 	private String url;
 	
 	@XStreamAsAttribute
