@@ -58,7 +58,11 @@ public class TwilioConverter
 		}
 		catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw new RuntimeException("error while accessing field '"
+								+ this.fieldName
+								+ "' in class "
+								+ targetClass.getName(),
+								e);
 		}
 		
 	}
