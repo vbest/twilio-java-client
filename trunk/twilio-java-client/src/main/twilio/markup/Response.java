@@ -1,6 +1,7 @@
 
 package twilio.markup;
 
+import java.io.StringWriter;
 import java.util.*;
 
 import twilio.markup.internal.xstream.XStreamFactory;
@@ -30,7 +31,14 @@ public class Response
 	{
 		XStream xstream = XStreamFactory.createXStream();
 		
-		return xstream.toXML(this);
+		StringWriter writer = new StringWriter();
+		
+		writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+		
+		xstream.toXML(this, writer);
+		
+		return writer.toString();
+		
 	}
 	
 	public String toString()
