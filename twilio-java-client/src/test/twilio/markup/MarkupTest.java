@@ -9,6 +9,14 @@ public class MarkupTest extends TestCase
 	{
 		Response rsp = new Response();
 
+		Dial dial = new Dial();
+		
+		Number n = new Number("+1 503-555-5555");
+		
+		dial.add(n);
+		
+		rsp.add(dial);
+		
 		Play play = new Play();
 		play.setUrl("http://www.foo.com/music.mp3");
 		play.setLoop(1);
@@ -30,13 +38,9 @@ public class MarkupTest extends TestCase
 		rsp.add(new Say("Thank you"));
 		
 		
-		Dial dial = new Dial();
+		rsp.add(new Pause(5));
 		
-		Number n = new Number("+1 503-555-5555");
-		
-		dial.add(n);
-		
-		rsp.add(dial);
+		rsp.add(new Hangup());
 		
 		String xml = rsp.toXml();
 		
