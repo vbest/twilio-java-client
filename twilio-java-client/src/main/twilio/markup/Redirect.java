@@ -13,6 +13,15 @@ public class Redirect extends Verb
 	@XStreamAsAttribute
 	private String httpMethod = Constants.DEFAULT_HTTP_METHOD;
 	
+	public Redirect()
+	{
+		super();
+	}
+	
+	public Redirect(String url)
+	{
+		this.setUrl(url);
+	}
 	
 	public String getHttpMethod()
 	{
