@@ -34,7 +34,21 @@ public class Response
 		verbs.add(v);
 	}
 
+	public void add(Verb...verbs)
+	{
+		for (Verb v : verbs)
+		{
+			this.add(v);
+		}
+	}
 	
+	public void add(java.util.Collection<Verb> verbs)
+	{
+		for (Verb v : verbs)
+		{
+			this.add(v);
+		}
+	}
 
 	
 	public String getVersion()
