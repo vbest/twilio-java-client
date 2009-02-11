@@ -37,6 +37,8 @@ public class Response
 		
 		xstream.toXML(this, writer);
 		
+		writer.flush();
+		
 		return writer.toString();
 		
 	}
