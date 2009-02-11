@@ -8,6 +8,7 @@ import twilio.markup.internal.xstream.XStreamFactory;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
@@ -20,6 +21,8 @@ public class Response
 {
 	public static final String DEFAULT_ENCODING = "UTF-8";
 	
+	@XStreamAlias("version")
+	@XStreamAsAttribute
 	private String version = "2008-08-01";
 	
 	
