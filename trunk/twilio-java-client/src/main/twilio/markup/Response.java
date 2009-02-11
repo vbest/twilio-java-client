@@ -29,6 +29,16 @@ public class Response
 	@XStreamImplicit
 	private List<Verb> verbs = new ArrayList<Verb>();
 	
+	public Response()
+	{
+		super();
+	}
+	
+	public Response(Verb... verbs)
+	{
+		this.add(verbs);
+	}
+	
 	public void add(Verb v)
 	{
 		verbs.add(v);
