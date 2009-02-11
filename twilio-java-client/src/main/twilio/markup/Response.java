@@ -18,6 +18,11 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamAlias("Response")
 public class Response
 {
+	public static final String DEFAULT_ENCODING = "UTF-8";
+	
+	private String version = "2008-08-01";
+	
+	
 	@XStreamImplicit
 	private List<Verb> verbs = new ArrayList<Verb>();
 	
@@ -27,13 +32,29 @@ public class Response
 	}
 
 	
+
+	
+	public String getVersion()
+	{
+		return version;
+	}
+
+
+	public void setVersion(String v)
+	{
+		this.version = v;
+	}
+
+
 	public String toXml()
 	{
 		XStream xstream = XStreamFactory.createXStream();
 		
 		StringWriter writer = new StringWriter();
 		
-		writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+		writer.write("<?xml version=\"1.0\" encoding=\""
+					+ DEFAULT_ENCODING
+					+ "\" ?>\n");
 		
 		xstream.toXML(this, writer);
 		
