@@ -42,6 +42,8 @@ public class MarkupTest extends TestCase
 		
 		rsp.add(new Hangup());
 		
+		rsp.add(new Redirect("http://www.twilioapp.com/foo/bar"));
+		
 		String xml = rsp.toXml();
 		
 		assertNotNull(xml);
