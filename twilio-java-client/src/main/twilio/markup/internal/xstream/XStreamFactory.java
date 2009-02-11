@@ -21,6 +21,7 @@ public class XStreamFactory
 		xstream.registerConverter(new TwilioConverter(xstream.getMapper(), Play.class, "url"), XStream.PRIORITY_VERY_HIGH);
 		xstream.registerConverter(new TwilioConverter(xstream.getMapper(), Number.class, "value"), XStream.PRIORITY_VERY_HIGH);
 		xstream.registerConverter(new TwilioConverter(xstream.getMapper(), Say.class, "message"), XStream.PRIORITY_VERY_HIGH);
+		xstream.registerConverter(new TwilioConverter(xstream.getMapper(), Redirect.class, "url"), XStream.PRIORITY_VERY_HIGH);
 		
 		xstream.autodetectAnnotations(true);
 		
