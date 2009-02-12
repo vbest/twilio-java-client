@@ -51,15 +51,26 @@ public class Gather extends Verb
 	}
 
 
+	/**
+	 * 
+	 * @return timeout in seconds
+	 * 
+	 */
 	public int getTimeout()
 	{
 		return timeout;
 	}
 
 
-	public void setTimeout(int timeout)
+	/**
+	 * 
+	 * 
+	 * @param timeout in seconds
+	 * 
+	 */
+	public void setTimeout(int timeoutInSeconds)
 	{
-		this.timeout = timeout;
+		this.timeout = timeoutInSeconds;
 	}
 
 
