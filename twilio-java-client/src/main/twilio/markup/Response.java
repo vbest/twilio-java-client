@@ -39,25 +39,30 @@ public class Response
 		this.add(verbs);
 	}
 	
-	public void add(Verb v)
+	public Response add(Verb v)
 	{
 		verbs.add(v);
+		return this;
 	}
 
-	public void add(Verb...verbs)
+	public Response add(Verb...verbs)
 	{
 		for (Verb v : verbs)
 		{
 			this.add(v);
 		}
+		
+		return this;
 	}
 	
-	public void add(java.util.Collection<Verb> verbs)
+	public Response add(java.util.Collection<Verb> verbs)
 	{
 		for (Verb v : verbs)
 		{
 			this.add(v);
 		}
+		
+		return this;
 	}
 
 	
