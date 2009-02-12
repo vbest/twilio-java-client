@@ -51,12 +51,23 @@ public class Record extends Verb
 	}
 
 
+	/**
+	 * 
+	 * @return timeout in seconds
+	 * 
+	 */
 	public int getTimeout()
 	{
 		return timeout;
 	}
 
 
+	/**
+	 * 
+	 * 
+	 * @param timeout in seconds
+	 * 
+	 */
 	public void setTimeout(int timeout)
 	{
 		this.timeout = timeout;
