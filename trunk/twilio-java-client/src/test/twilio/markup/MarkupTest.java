@@ -37,7 +37,6 @@ public class MarkupTest extends TestCase
 		
 		rsp.add(new Say("Thank you"));
 		
-		
 		rsp.add(new Pause(5));
 		
 		rsp.add(new Hangup());
