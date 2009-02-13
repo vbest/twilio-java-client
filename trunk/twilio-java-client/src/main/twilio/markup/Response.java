@@ -4,7 +4,7 @@ package twilio.markup;
 import java.io.StringWriter;
 import java.util.*;
 
-import twilio.markup.internal.xstream.XStreamFactory;
+import twilio.internal.xstream.XStreamFactory;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -80,7 +80,7 @@ public class Response
 
 	public String toXml()
 	{
-		XStream xstream = XStreamFactory.createXStream();
+		XStream xstream = XStreamFactory.createMarkupXStream();
 		
 		StringWriter writer = new StringWriter();
 		
