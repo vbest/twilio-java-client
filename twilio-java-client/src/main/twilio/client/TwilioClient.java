@@ -13,8 +13,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import com.thoughtworks.xstream.XStream;
 
-import twilio.client.internal.xstream.XStreamFactory;
-import twilio.client.internal.httpclient.*;
+import twilio.internal.httpclient.*;
+import twilio.internal.xstream.XStreamFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -102,7 +102,7 @@ public class TwilioClient
 	
 	protected TwilioResponse fromXml(String xml)
 	{
-		XStream xstream = XStreamFactory.createXStream();
+		XStream xstream = XStreamFactory.createClientXStream();
 		
 		TwilioResponse r = (TwilioResponse) xstream.fromXML(xml);
 		
