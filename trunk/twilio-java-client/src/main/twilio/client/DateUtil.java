@@ -37,7 +37,7 @@ public class DateUtil
 		} 
 		catch (ParseException e)
 		{
-			throw new RuntimeException(e);
+			throw new RuntimeException("error while parsing date string: \"" + s + "\"", e);
 		}
 	}
 }
