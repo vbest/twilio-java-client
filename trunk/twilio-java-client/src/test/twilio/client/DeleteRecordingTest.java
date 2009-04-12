@@ -9,7 +9,7 @@ public class DeleteRecordingTest extends AbstractTwilioTest
 	{
 		TwilioClient c = getClient();
 	
-		Recordings recordings = c.getRecordings(getAccountSid()); 
+		Recordings recordings = c.getRecordings(); 
 		
 		assertNotNull(recordings);
 		

@@ -14,7 +14,7 @@ public class GetAccountTest extends AbstractTwilioTest
 		
 		TwilioClient c = getClient();
 	
-		Account account = c.getAccount(getAccountSid()); 
+		Account account = c.getAccount(); 
 		
 		assertNotNull(account);
 		

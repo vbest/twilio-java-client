@@ -14,7 +14,7 @@ public class GetOutgoingCallerIdsTest extends AbstractTwilioTest
 		
 		TwilioClient c = getClient();
 	
-		OutgoingCallerIds callerIds = c.getOutgoingCallerIds(getAccountSid()); 
+		OutgoingCallerIds callerIds = c.getOutgoingCallerIds(); 
 		
 		assertNotNull(callerIds);
 		
