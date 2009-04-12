@@ -3,6 +3,7 @@ package twilio.client;
 
 import org.apache.http.*;
 import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.*;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -27,6 +28,7 @@ public class TwilioClient
 	private boolean compressionEnabled = false;
 	private String accountSid;
 	private String authToken;
+	private Credentials credentials;
 	
 	public TwilioClient(String accountSid, String authToken)
 	{
@@ -49,6 +51,7 @@ public class TwilioClient
 	{
 		this.accountSid = accountSid;
 		this.authToken = authToken;
+		credentials = new UsernamePasswordCredentials(this.accountSid, this.authToken);
 	}
 	
 	public String getAccountSid()
@@ -156,8 +159,8 @@ public class TwilioClient
 		// set credentials for HTTP Basic Authentication
 		DefaultHttpClient defaultClient = (DefaultHttpClient) httpClient;
 		defaultClient.getCredentialsProvider().setCredentials(
-					AuthScope.ANY, 
-					new UsernamePasswordCredentials(this.getAccountSid(), this.getAuthToken()));
+														AuthScope.ANY, 
+														credentials);
 		
 		HttpResponse response = null;
 		HttpEntity entity = null;
@@ -167,13 +170,14 @@ public class TwilioClient
 			response = c.execute(request);
 
 			StatusLine status = response.getStatusLine();
-			
 			if ( (status.getStatusCode() < 200) || (status.getStatusCode() > 299) )
 			{
 				throw new RuntimeException(
-								"HTTP " 
-								+ httpMethod 
-								+ " response status code = " 
+								"HTTP "
+								+ request.getMethod()
+								+ "  "
+								+ url
+								+ "  response status code = " 
 								+ status.getStatusCode());
 			}
 			
@@ -191,7 +195,7 @@ public class TwilioClient
 		}
 		finally
 		{
-			// todo : ???
+			// todo : something here (?)
 		}
 		
 	}
@@ -311,13 +315,17 @@ public class TwilioClient
 	 */
 	public String get(String url) 
 	{
+		HttpResponse response = null;
+		
+		HttpEntity entity = null;
+		
 		try
 		{
 			HttpGet get = new HttpGet(url);
 			
-			HttpResponse response = this.getHttpClient().execute(get);
+			response = this.getHttpClient().execute(get);
 			
-			HttpEntity entity = response.getEntity();
+			entity = response.getEntity();
 			
 			if (entity == null)
 			{
@@ -334,6 +342,10 @@ public class TwilioClient
 		{
 			throw new RuntimeException(ex);
 		}
+		finally
+		{
+			// todo : something here?
+		}
 	}
 
 	
@@ -349,20 +361,13 @@ public class TwilioClient
 		}
 	}
 	
-	protected StringBuilder buildRequestUrl(String path, Map<String, String> urlParameters)
-	{
-		StringBuilder requestUrl = getTwilioEndpoint();
-		
-		// todo : code here
-		
-		return requestUrl;
-	}
 	
+	// todo : reconsider this method
 	protected StringBuilder getTwilioEndpoint()
 	{
 		
 		StringBuilder endpoint = new StringBuilder();
-		endpoint.append("https://api.twilio.com/2008-08-01/");
+		endpoint.append("https://api.twilio.com/2008-08-01/");  
 
 		return endpoint;
 	}
@@ -382,7 +387,7 @@ public class TwilioClient
 		}
 	}
 
-	public Call call(String accountSid, String from, String to, String callbackUrl)
+	public Call call(String from, String to, String callbackUrl)
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		
@@ -393,7 +398,7 @@ public class TwilioClient
 		TwilioResponse r = sendTwilioRequest("POST", 
 								this.getTwilioEndpoint() 
 									.append("Accounts/")
-									.append(accountSid)
+									.append(this.getAccountSid())
 									.append("/Calls"),
 								params);
 
@@ -401,12 +406,12 @@ public class TwilioClient
 		
 	}
 
-	public Calls getCalls(String accountSid)
+	public Calls getCalls()
 	{
-		return getCalls(accountSid, null);
+		return getCalls(null);
 	}
 	
-	public Calls getCalls(String accountSid, String startTime)
+	public Calls getCalls(String startTime)
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		
@@ -418,7 +423,7 @@ public class TwilioClient
 		TwilioResponse r = sendTwilioRequest("GET", 
 								this.getTwilioEndpoint() 
 									.append("Accounts/")
-									.append(accountSid)
+									.append(getAccountSid())
 									.append("/Calls"),
 								params);
 
@@ -426,7 +431,7 @@ public class TwilioClient
 		
 	}
 	
-	public IncomingPhoneNumbers getIncomingPhoneNumbers(String accountSid)
+	public IncomingPhoneNumbers getIncomingPhoneNumbers()
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		
@@ -434,7 +439,7 @@ public class TwilioClient
 		TwilioResponse r = sendTwilioRequest("GET", 
 								this.getTwilioEndpoint() 
 									.append("Accounts/")
-									.append(accountSid)
+									.append(getAccountSid())
 									.append("/IncomingPhoneNumbers"),
 								params);
 
@@ -455,7 +460,7 @@ public class TwilioClient
 		return l;
 	}
 
-	public OutgoingCallerIds getOutgoingCallerIds(String accountSid)
+	public OutgoingCallerIds getOutgoingCallerIds()
 	{
 
 		/*
@@ -469,7 +474,7 @@ public class TwilioClient
 		TwilioResponse r = sendTwilioRequest("GET", 
 								this.getTwilioEndpoint() 
 									.append("Accounts/")
-									.append(accountSid)
+									.append(getOutgoingCallerIds())
 									.append("/OutgoingCallerIds"),
 								params);
 
@@ -477,7 +482,7 @@ public class TwilioClient
 		
 	}
 
-	public Account getAccount(String accountSid)
+	public Account getAccount()
 	{
 
 		/*
@@ -491,14 +496,14 @@ public class TwilioClient
 		TwilioResponse r = sendTwilioRequest("GET", 
 								this.getTwilioEndpoint() 
 									.append("Accounts/")
-									.append(accountSid),
+									.append(getAccountSid()),
 								params);
 
 		return r.getAccount();
 		
 	}
 
-	public Recordings getRecordings(String accountSid)
+	public Recordings getRecordings()
 	{
 
 		/*
@@ -512,7 +517,7 @@ public class TwilioClient
 		TwilioResponse r = sendTwilioRequest("GET", 
 								this.getTwilioEndpoint() 
 									.append("Accounts/")
-									.append(accountSid)
+									.append(getAccountSid())
 									.append("/Recordings"),
 								params);
 
@@ -520,12 +525,12 @@ public class TwilioClient
 		
 	}
 
-	public byte[] getRecordingBytes(String accountSid, String recordingSid)
+	public byte[] getRecordingBytes(String recordingSid)
 	{
-		return getRecordingBytes(accountSid, recordingSid, RecordingFormat.DEFAULT);
+		return getRecordingBytes(recordingSid, RecordingFormat.DEFAULT);
 	}
 	
-	public byte[] getRecordingBytes(String accountSid, String recordingSid, RecordingFormat format)
+	public byte[] getRecordingBytes(String recordingSid, RecordingFormat format)
 	{
 
 		/*
@@ -537,7 +542,7 @@ public class TwilioClient
 		
 		StringBuilder url = this.getTwilioEndpoint() 
 									.append("Accounts/")
-									.append(accountSid)
+									.append(getAccountSid())
 									.append("/Recordings/")
 									.append(recordingSid)
 									.append(format.getFileExtension());
@@ -548,19 +553,19 @@ public class TwilioClient
 
 	public byte[] getRecordingBytes(Recording r, RecordingFormat format)
 	{
-		return getRecordingBytes(r.getAccountSid(), r.getSid(), format);
+		return getRecordingBytes(r.getSid(), format);
 	}
 	
 	public byte[] getRecordingBytes(Recording r)
 	{
-		return getRecordingBytes(r.getAccountSid(), r.getSid(), RecordingFormat.DEFAULT);
+		return getRecordingBytes(r.getSid(), RecordingFormat.DEFAULT);
 	}
 
 	public void deleteRecording(String recordingSid)
 	{
 		StringBuilder url = this.getTwilioEndpoint() 
 				.append("Accounts/")
-				.append(accountSid)
+				.append(getAccountSid())
 				.append("/Recordings/")
 				.append(recordingSid);
 
