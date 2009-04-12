@@ -8,7 +8,7 @@ public class CallTest extends AbstractTwilioTest
 	{
 		TwilioClient c = getClient();
 	
-		Call call = c.call(getAccountSid(), 
+		Call call = c.call( 
 						getCallFrom(), 
 						getCallTo(),
 						"http://www.google.com/");

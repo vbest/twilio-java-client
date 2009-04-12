@@ -9,7 +9,7 @@ public class GetRecordingTest extends AbstractTwilioTest
 	{
 		TwilioClient c = getClient();
 	
-		Recordings recordings = c.getRecordings(getAccountSid()); 
+		Recordings recordings = c.getRecordings(); 
 		
 		assertNotNull(recordings);
 		
@@ -18,10 +18,13 @@ public class GetRecordingTest extends AbstractTwilioTest
 			byte[] mp3 = c.getRecordingBytes(r, RecordingFormat.MP3);
 			
 			assertNotNull(mp3);
+		
+			assertTrue(mp3.length > 0);
 			
 			byte[] wav = c.getRecordingBytes(r, RecordingFormat.WAV);
 			
 			assertNotNull(wav);
+			assertTrue(wav.length > 0);
 			
 		}
 

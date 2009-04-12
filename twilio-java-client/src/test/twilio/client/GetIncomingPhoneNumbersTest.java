@@ -9,7 +9,7 @@ public class GetIncomingPhoneNumbersTest extends AbstractTwilioTest
 	{
 		TwilioClient c = getClient();
 	
-		IncomingPhoneNumbers phoneNumbers = c.getIncomingPhoneNumbers(getAccountSid()); 
+		IncomingPhoneNumbers phoneNumbers = c.getIncomingPhoneNumbers(); 
 		
 		assertNotNull(phoneNumbers);
 		
