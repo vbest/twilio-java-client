@@ -3,6 +3,8 @@ package twilio.client;
 
 public class CallStatus
 {
+	private int code = 1; // todo : fix this class
+	
 	/*
 	 
 	An integer representing the status of the call
@@ -50,5 +52,9 @@ public class CallStatus
 	{
 		return code == 5;
 	}
-	
+
+	public int getCode()
+	{
+		return code;
+	}
 }

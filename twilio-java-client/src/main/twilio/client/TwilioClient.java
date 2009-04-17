@@ -118,6 +118,11 @@ public class TwilioClient
 		
 		HttpUriRequest request = null;
 		
+		if (params == null)
+		{
+			params = new HashMap<String, String>();
+		}
+		
 		if ("GET".equalsIgnoreCase(httpMethod))
 		{
 			String queryString = buildQueryString(params);
@@ -411,21 +416,15 @@ public class TwilioClient
 		return getCalls(null);
 	}
 	
-	public Calls getCalls(String startTime)
+	
+	public Calls getCalls(CallSearchCriteria criteria)
 	{
-		Map<String, String> params = new HashMap<String, String>();
-		
-		if (startTime != null)
-		{
-			params.put("StartTime", startTime);
-		}
-		
 		TwilioResponse r = sendTwilioRequest("GET", 
 								this.getTwilioEndpoint() 
 									.append("Accounts/")
 									.append(getAccountSid())
 									.append("/Calls"),
-								params);
+									( criteria == null ) ? (null): criteria.getParameterMap());
 
 		return r.getCalls();
 		
