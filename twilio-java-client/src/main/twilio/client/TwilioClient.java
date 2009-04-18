@@ -21,6 +21,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
 
+// todo :   implement pre-emptive authorization ???
+
 public class TwilioClient
 {
 	private HttpClient httpClient;
