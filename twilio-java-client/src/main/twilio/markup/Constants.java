@@ -9,5 +9,6 @@ public class Constants
 	
 	public static final String DEFAULT_HTTP_METHOD = "POST";
 	
-	
+	public static final String TWILIO_MARKUP_CONTENT_TYPE = "text/xml";
+
 }
