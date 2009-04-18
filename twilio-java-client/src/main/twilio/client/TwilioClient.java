@@ -528,16 +528,45 @@ public class TwilioClient
 		
 	}
 
+
+	/**
+	 * 
+	 * @return all Recordings associated with your Twilio account
+	 * 
+	 */
 	public Recordings getRecordings()
+	{
+		return getRecordings(null);
+	}
+	
+	/**
+	 * 
+	 * @param callSid
+	 * 
+	 * @return all recordings associated with callSid 
+	 * 
+	 */
+	public Recordings getRecordings(String callSid)
 	{
 
 		/*
 		 
+		   Documentation:
+		   
+		      http://www.twilio.com/docs/api_reference/REST/recording
+		   
+		   Example URL:
+		   
 		    /2008-08-01/Accounts/{YourAccountSid}/Recordings
 		     
 		 */
 		
 		Map<String, String> params = new HashMap<String, String>();
+		
+		if (callSid != null)
+		{
+			params.put("CalSid", callSid);
+		}
 		
 		TwilioResponse r = sendTwilioRequest("GET", 
 								this.getTwilioEndpoint() 
