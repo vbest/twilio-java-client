@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class TwilioServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
+	public static final String TWIML_CONTENT_TYPE = "text/xml";
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
@@ -29,6 +30,8 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected void doTwilioRequest(TwilioRequest req, HttpServletResponse resp)
 	{
+		resp.setContentType(TWIML_CONTENT_TYPE);
+		
 		if (req.isDialCallback())
 		{
 			onDialCallback(req, resp);
