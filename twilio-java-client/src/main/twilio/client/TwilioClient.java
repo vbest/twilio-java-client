@@ -425,16 +425,8 @@ public class TwilioClient
 									.append("/Calls/")
 									.append(callSid));
 
-		Calls calls = r.getCalls();
+		return r.getCall();
 		
-		if (calls.size() == 0)
-		{
-			return null;
-		}
-		else
-		{
-			return calls.get(0);
-		}
 	}
 	
 	public Calls getCalls()
