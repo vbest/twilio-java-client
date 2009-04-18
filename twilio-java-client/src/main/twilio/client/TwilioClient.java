@@ -411,6 +411,32 @@ public class TwilioClient
 		
 	}
 
+	public Call getCall(String callSid)
+	{
+		if ( (callSid == null) || (callSid.length() == 0) )
+		{
+			throw new IllegalArgumentException("callSid parameter: '" + callSid + "'");
+		}
+		
+		TwilioResponse r = sendTwilioRequest("GET", 
+								this.getTwilioEndpoint() 
+									.append("Accounts/")
+									.append(getAccountSid())
+									.append("/Calls/")
+									.append(callSid));
+
+		Calls calls = r.getCalls();
+		
+		if (calls.size() == 0)
+		{
+			return null;
+		}
+		else
+		{
+			return calls.get(0);
+		}
+	}
+	
 	public Calls getCalls()
 	{
 		return getCalls(null);
