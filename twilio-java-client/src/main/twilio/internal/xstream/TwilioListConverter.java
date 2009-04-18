@@ -1,11 +1,6 @@
 package twilio.internal.xstream;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Vector;
 
-import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.collections.CollectionConverter;
 import com.thoughtworks.xstream.mapper.Mapper;
 
