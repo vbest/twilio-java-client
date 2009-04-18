@@ -3,6 +3,12 @@ package twilio.client;
 
 import java.util.*;
 
+/**
+ * 
+ * An <i>IncomingPhoneNumber</i> represents a phone number 
+ * given to you by Twilio to receive incoming phone calls. 
+ *
+ */
 public class IncomingPhoneNumber
 {
 	private String sid;
