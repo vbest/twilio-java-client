@@ -568,7 +568,7 @@ public class TwilioClient
 		
 		if (callSid != null)
 		{
-			params.put("CalSid", callSid);
+			params.put("CallSid", callSid);
 		}
 		
 		TwilioResponse r = sendTwilioRequest("GET", 
