@@ -82,5 +82,11 @@ abstract class AbstractTwilioTest extends TestCase
 		return c;
 	}
 	
-		
+	protected void assertValid(Call c) throws Exception
+	{
+		assertNotNull(c);
+		assertNotNull(c.getSid());
+		assertNotNull(c.getCallSegmentSid());
+		assertNotNull(c.getPhoneNumberSid());
+	}
 }
