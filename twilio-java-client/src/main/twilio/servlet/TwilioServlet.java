@@ -5,6 +5,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 
+ *  This is an abstract class. You'll need to extend it.
+ *
+ *  <code>
+ *   public class MyTwilioServlet extends TwilioServlet
+ *   {
+ *      // code here
+ *   }
+ *  </code>
+ *  
+ */
 public abstract class TwilioServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
