@@ -5,16 +5,18 @@ import java.util.*;
 
 public class Notification
 {
+ 
 	private String sid;
 	private String accountSid;
 	private String callSid;
-	private String log;
+	private Integer log;
 	private Integer errorCode;
 	private String moreInfo;
 	private String requestUrl;
 	private String requestMethod;
 	private String messageText;
 	private Calendar messageDate;
+	
 	public String getSid()
 	{
 		return sid;
@@ -39,11 +41,11 @@ public class Notification
 	{
 		this.callSid = callSid;
 	}
-	public String getLog()
+	public Integer getLog()
 	{
 		return log;
 	}
-	public void setLog(String log)
+	public void setLog(Integer log)
 	{
 		this.log = log;
 	}
@@ -100,5 +102,22 @@ public class Notification
 	public String toString()
 	{
 		return ToStringBuilder.build(this);
+	}
+	
+	public  final boolean isError()
+	{
+		return ( (log != null) && (log.equals(Log.ERROR)) );
+	}
+
+	public  final boolean isWarning()
+	{
+		return ( (log != null) && (log.equals(Log.WARNING)) );
+	}
+	
+	public static class Log
+	{
+		public static final Integer ERROR = new Integer(0);
+		public static final Integer WARNING = new Integer(1);
+		
 	}
 }
