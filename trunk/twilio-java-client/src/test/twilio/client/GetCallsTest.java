@@ -9,11 +9,19 @@ public class GetCallsTest extends AbstractTwilioTest
 	{
 		TwilioClient c = getClient();
 	
-		Calls calls = c.getCalls(getAccountSid()); 
+		Calls calls = c.getCalls(); 
 		
 		assertNotNull(calls);
 		
-		System.out.println(calls);
+		for (Call call : calls)
+		{
+			assertValid(call);
+			System.out.println(call);
+			Call cc = c.getCall(call.getSid());
+			assertValid(cc);
+		}
+		
 	}
+	
 	
 }
