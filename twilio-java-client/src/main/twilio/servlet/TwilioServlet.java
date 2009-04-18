@@ -1,6 +1,9 @@
 
 package twilio.servlet;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,12 +25,12 @@ public abstract class TwilioServlet extends HttpServlet
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp)
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException
 	{
 		doTwilioRequest(new TwilioRequest(req), resp);
 	}
 	
-	protected void doTwilioRequest(TwilioRequest req, HttpServletResponse resp)
+	protected void doTwilioRequest(TwilioRequest req, HttpServletResponse resp) throws IOException
 	{
 		resp.setContentType(twilio.markup.Constants.TWILIO_MARKUP_CONTENT_TYPE);
 		
@@ -53,7 +56,17 @@ public abstract class TwilioServlet extends HttpServlet
 		}
 	}
 
-	abstract protected void onUnknownRequest(TwilioRequest req, HttpServletResponse resp);
+	protected void onUnknownRequest(TwilioRequest req, HttpServletResponse resp) throws IOException
+	{
+		resp.setContentType("text/plain");
+		resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		
+		PrintWriter w = resp.getWriter();
+		
+		w.println("unexpected request");
+		w.println("Request URL: " + req.getRequestURL());
+		
+	}
 
 	abstract protected void onRecordCallback(TwilioRequest req, HttpServletResponse resp);
 
