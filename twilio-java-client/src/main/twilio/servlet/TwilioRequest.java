@@ -4,6 +4,8 @@ package twilio.servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+import twilio.client.CallStatus;
+
 public class TwilioRequest extends HttpServletRequestWrapper
 {
 
@@ -32,9 +34,26 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		return this.getParameter("AccountGuid");
 	}
 	
-	public String getCallStatus()
+	public String getCallStatusParameter()
 	{
 		return this.getParameter("CallStatus");
+	}
+	
+	public CallStatus getCallStatus()
+	{
+		if (getCallStatusParameter() == null)
+		{
+			return null;
+		}
+		else
+		{
+			CallStatus status = new CallStatus();
+			
+			// todo : code here
+			
+			return status;
+		}
+		
 	}
 	
 	public String getCallerCity()
