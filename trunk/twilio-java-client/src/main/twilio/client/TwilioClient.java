@@ -18,7 +18,6 @@ import twilio.internal.httpclient.*;
 import twilio.internal.xstream.XStreamFactory;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.net.URLEncoder;
 import java.util.*;
 
