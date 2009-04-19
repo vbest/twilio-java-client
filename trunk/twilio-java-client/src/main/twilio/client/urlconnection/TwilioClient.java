@@ -122,7 +122,12 @@ public class TwilioClient extends twilio.client.TwilioClient
 				}
 			}
 			
-			// todo : check HTTP response status code
+			int code = urlconn.getResponseCode();
+			
+			if ( (code < 200) || (code > 299) ) 
+			{
+                throw new RuntimeException("HTTP response status code = " + code);
+            }
 			
 			String response = readResponse(urlconn);
 			
