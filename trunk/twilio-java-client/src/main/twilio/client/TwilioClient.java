@@ -18,6 +18,7 @@ import twilio.internal.httpclient.*;
 import twilio.internal.xstream.XStreamFactory;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -43,10 +44,17 @@ public class TwilioClient
 		
 		setCredentials(accountSid, authToken);
 		
+	}
+	
+	protected HttpClient createHttpClient()
+	{
+		DefaultHttpClient hclient = new DefaultHttpClient();
+		
 		setUserAgent("twilio-java-client");
 		setConnectionTimeout( 10 * 1000);
 		setSocketTimeout(25 * 1000);
 		
+		return hclient;
 	}
 	
 	public void setCredentials(String accountSid, String authToken)
@@ -127,11 +135,7 @@ public class TwilioClient
 		
 		if ("GET".equalsIgnoreCase(httpMethod))
 		{
-			String queryString = buildQueryString(params);
-			
-			url = url + queryString;
-			
-			request = new HttpGet(url.toString());
+			request = new HttpGet(buildUrl(url, params));
 			
 		}
 		else if ("POST".equalsIgnoreCase(httpMethod))
@@ -207,6 +211,15 @@ public class TwilioClient
 		
 	}
 	
+	protected String buildUrl(CharSequence url, Map<String, String> params)
+	{
+		String queryString = buildQueryString(params);
+		
+		String s = url + queryString;
+		
+		return s;
+	}
+
 	private String buildQueryString(Map<String, String> params)
 	{
 		StringBuffer query = new StringBuffer();
@@ -246,6 +259,10 @@ public class TwilioClient
 
 	protected HttpClient getHttpClient()
 	{
+		if (this.httpClient == null)
+		{
+			this.httpClient = createHttpClient(); 
+		}
 		
 		if (this.httpClient instanceof DefaultHttpClient)
 		{
