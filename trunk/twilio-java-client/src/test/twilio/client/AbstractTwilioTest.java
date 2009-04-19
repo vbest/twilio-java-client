@@ -78,7 +78,7 @@ abstract class AbstractTwilioTest extends TestCase
 	
 	protected TwilioClient getClient() 
 	{
-		TwilioClient c = new TwilioClient(getAccountSid(), getAuthToken());
+		TwilioClient c = new twilio.client.urlconnection.TwilioClient(getAccountSid(), getAuthToken());
 		return c;
 	}
 	

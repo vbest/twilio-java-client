@@ -11,6 +11,8 @@ public class GetCallsTest extends AbstractTwilioTest
 	
 		Calls calls = c.getCalls(); 
 		
+		System.out.println("calls.size() = " + calls.size());
+		
 		assertNotNull(calls);
 		
 		for (Call call : calls)
