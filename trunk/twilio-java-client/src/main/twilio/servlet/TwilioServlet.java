@@ -1,7 +1,11 @@
 
 package twilio.servlet;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServlet;
@@ -76,4 +80,68 @@ public abstract class TwilioServlet extends HttpServlet
 
 	abstract protected void onDialCallback(TwilioRequest req, HttpServletResponse resp);
 
+	protected void sendBinaryResponse(HttpServletResponse resp, byte[] data, String mimeType)
+	{
+		sendBinaryResponse(resp, data, data.length, mimeType);
+	}
+	
+	protected void sendBinaryResponse(HttpServletResponse resp, InputStream data, int length, String mimeType)
+	{
+		sendBinaryResponse(resp, data, length, mimeType);
+	}
+	
+	
+	protected void sendBinaryResponse(HttpServletResponse resp, Object data, int length, String mimeType)
+	{
+		resp.setContentType(mimeType);
+		
+		if (length >= 0)
+		{
+			resp.setContentLength(length);
+		}
+		
+		try
+		{
+			OutputStream out = resp.getOutputStream();
+			
+			if (data instanceof byte[])
+			{
+				byte[] byteArray = (byte[]) data;
+				out.write(byteArray, 0, byteArray.length);
+			}
+			else if (data instanceof InputStream)
+			{
+				byte[] buffer = new byte[8192];
+				
+				// todo : out.write(data, 0, );
+			}
+			else if (data instanceof ByteArrayOutputStream)
+			{
+				ByteArrayOutputStream baos = (ByteArrayOutputStream) data;
+				baos.writeTo(out);
+			}
+			else
+			{
+				resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			}
+			out.flush();
+		}
+		catch (IOException ignored)
+		{
+			// ignored
+		}
+			
+		
+	}
+	
+	protected void sendWavResponse(HttpServletResponse resp, byte[] wav)
+	{
+		sendBinaryResponse(resp, wav, "audio/x-wav");
+	}
+
+
+	protected void sendMp3Response(HttpServletResponse resp, byte[] mp3)
+	{
+		sendBinaryResponse(resp, mp3, "audio/mpeg");
+	}
 }
