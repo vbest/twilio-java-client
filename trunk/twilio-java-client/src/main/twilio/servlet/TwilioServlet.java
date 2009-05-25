@@ -1,7 +1,6 @@
 
 package twilio.servlet;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -111,9 +110,16 @@ public abstract class TwilioServlet extends HttpServlet
 			}
 			else if (data instanceof InputStream)
 			{
+				InputStream input = (InputStream) data;
 				byte[] buffer = new byte[8192];
 				
-				// todo : out.write(data, 0, );
+				int n = -1;
+				
+				while ( (n = input.read(buffer)) != -1)
+				{
+					out.write(buffer, 0, n);
+				}
+				
 			}
 			else if (data instanceof ByteArrayOutputStream)
 			{
@@ -123,6 +129,7 @@ public abstract class TwilioServlet extends HttpServlet
 			else
 			{
 				resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				// todo : log an error
 			}
 			out.flush();
 		}
