@@ -153,5 +153,9 @@ public class TwilioRequest extends HttpServletRequestWrapper
 	{
 		return this.getMethod().equalsIgnoreCase("POST");
 	}
-	
+
+	public String toString()
+	{
+		return ServletUtil.toString(this);
+	}
 }
