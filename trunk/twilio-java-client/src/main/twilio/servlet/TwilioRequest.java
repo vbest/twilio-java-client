@@ -125,7 +125,7 @@ public class TwilioRequest extends HttpServletRequestWrapper
 	{
 		// todo : return ( (getCalled() != null) || (getCalled().equalsIgnoreCase(getAccountPhoneNumber()));
 		
-		return false;
+		return true;
 	}
 	
 	public boolean isDialCallback()
