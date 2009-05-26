@@ -4,6 +4,7 @@ package twilio.servlet;
 import java.util.*;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -65,12 +66,65 @@ public class SecurityUtil
 	{
 		StringBuffer data = req.getRequestURL();
 		
+		data.append(req.getRequestURL());
+		data.append("?");
+		if (req.getQueryString() != null)
+		{
+			data.append(req.getQueryString());
+		}
+		
 		if (req.getMethod().equalsIgnoreCase("POST"))
 		{
-			// todo
+			@SuppressWarnings("unchecked")
+			Map<String, String> paramMap = req.getParameterMap();
+			List<String> keyList = new ArrayList<String>(getPostParameterNames(req));
+			Collections.sort(keyList);
+			for (String key : keyList)
+			{
+				data.append(key);
+				String value = "";
+				if (paramMap.get(key) != null)
+				{
+					value = paramMap.get(key);
+				}
+				data.append(value);
+			}
+			
 		}
 		
 		return verifyRequest(data, req.getTwilioSignature(), twilioAuthToken);
 		
+	}
+	
+	private static Set<String> getPostParameterNames(HttpServletRequest req)
+	{
+		@SuppressWarnings("unchecked")
+		Set<String> result = (Set<String>) req.getParameterMap().keySet();
+		
+		result.retainAll(getQueryStringParameterNames(req));
+		
+		return result;
+		
+	}
+	
+	private static Set<String> getQueryStringParameterNames(HttpServletRequest req)
+	{
+		Set<String> result = new HashSet<String>();
+		
+		if (req.getQueryString() != null)
+		{
+			StringTokenizer tokenizer = new StringTokenizer(req.getQueryString(), "&");
+			while (tokenizer.hasMoreTokens())
+			{
+				String token = tokenizer.nextToken();
+				int equalSignPosition = token.indexOf('=');
+				if (equalSignPosition != -1)
+				{
+					result.add( token.substring(0, equalSignPosition) );
+				}
+			}
+		}
+		
+		return result;
 	}
 }
