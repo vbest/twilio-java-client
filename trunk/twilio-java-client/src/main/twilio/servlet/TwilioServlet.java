@@ -67,7 +67,11 @@ public abstract class TwilioServlet extends HttpServlet
 		PrintWriter w = resp.getWriter();
 		
 		w.println("unexpected request");
-		w.println("Request URL: " + req.getRequestURL());
+		w.print("Request URL: " + req.getRequestURL());
+		if (req.getQueryString() != null)
+		{
+			w.print("?" + req.getQueryString());
+		}
 		
 	}
 
