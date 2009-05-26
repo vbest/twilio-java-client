@@ -62,6 +62,11 @@ public class SecurityUtil
 		}
 	}
 	
+	static public boolean verifyRequest(HttpServletRequest req, String twilioAuthToken)
+	{
+		return verifyRequest(new TwilioRequest(req), twilioAuthToken);
+	}
+	
 	static public boolean verifyRequest(TwilioRequest req, String twilioAuthToken)
 	{
 		StringBuffer data = req.getRequestURL();
