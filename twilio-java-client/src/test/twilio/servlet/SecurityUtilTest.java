@@ -17,9 +17,15 @@ public class SecurityUtilTest extends TestCase
 		
 		req.setQueryString("foo=bar&color=green");
 		
+		req.addHeader("X-Twilio-Signature", "xxx");
+		
 		boolean result = SecurityUtil.verifyRequest(req, "foo");
 		
 		assertTrue(result);
+		
+		result = SecurityUtil.verifyRequest(new MockHttpServletRequest(), "bogus-auth-token");
+		
+		assertFalse(result);
 		
 	}
 }
