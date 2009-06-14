@@ -144,6 +144,11 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		return (getDigits() != null);
 	}
 
+	public boolean isTranscribeCallback()
+	{
+		return false; // todo : implement this method
+	}
+	
 	public boolean isGet()
 	{
 		return this.getMethod().equalsIgnoreCase("GET");
