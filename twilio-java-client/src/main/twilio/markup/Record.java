@@ -27,6 +27,14 @@ public class Record extends Verb
 	@XStreamAsAttribute
 	private int maxLength = 5;
 	
+	@XStreamAlias("transcribe")
+	@XStreamAsAttribute
+	private boolean transcribe = false;
+	
+	@XStreamAlias("transcribeCallback")
+	@XStreamAsAttribute
+	private String transcribeCallback;
+	
 	public String getAction()
 	{
 		return action;
@@ -95,6 +103,30 @@ public class Record extends Verb
 	public void setMaxLength(int maxLength)
 	{
 		this.maxLength = maxLength;
+	}
+
+
+	public boolean isTranscribe()
+	{
+		return transcribe;
+	}
+
+
+	public void setTranscribe(boolean b)
+	{
+		this.transcribe = b;
+	}
+
+
+	public String getTranscribeCallback()
+	{
+		return transcribeCallback;
+	}
+
+
+	public void setTranscribeCallback(String callbackUrl)
+	{
+		this.transcribeCallback = callbackUrl;
 	}
 
 
