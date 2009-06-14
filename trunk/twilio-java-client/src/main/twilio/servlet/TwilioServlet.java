@@ -53,6 +53,10 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			onInboundCall(req, resp);
 		}
+		else if (req.isTranscribeCallback())
+		{
+			onTranscribeCallback(req, resp);
+		}
 		else 
 		{
 			onUnknownRequest(req, resp);
@@ -82,6 +86,8 @@ public abstract class TwilioServlet extends HttpServlet
 	abstract protected void onGatherCallback(TwilioRequest req, HttpServletResponse resp);
 
 	abstract protected void onDialCallback(TwilioRequest req, HttpServletResponse resp);
+
+	abstract protected void onTranscribeCallback(TwilioRequest req, HttpServletResponse resp);
 
 	protected void sendBinaryResponse(HttpServletResponse resp, byte[] data, String mimeType)
 	{
