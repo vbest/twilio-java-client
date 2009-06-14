@@ -16,7 +16,7 @@ public class ServletUtil
 	
 	static public String toString(HttpServletRequest req)
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		StringBuffer requestUrl = req.getRequestURL();
 		if (req.getQueryString() != null)
