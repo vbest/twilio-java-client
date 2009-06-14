@@ -2,7 +2,10 @@
 package twilio.servlet;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,34 +30,16 @@ public class ServletUtil
 		sb.append("HTTP request method:  " + req.getMethod()); 
 		sb.append("\n");
 		
-		Enumeration headers = req.getHeaderNames();
-		while (headers.hasMoreElements())
+		for (String headerName : getHeaderNames(req))
 		{
-			String headerName = (String) headers.nextElement();
 			sb.append("HTTP request header: " + headerName + "=" + req.getHeader(headerName) + "\n");
 		}
 		
-		Enumeration parameters = req.getParameterNames();
-		while (parameters.hasMoreElements())
+		for (String paramName : getParameterNames(req))
 		{
-			String paramName = (String) parameters.nextElement();
 			sb.append("HTTP request parameter: " + paramName + "=" + req.getParameter(paramName) + "\n");
 		}
 
-		HttpSession session = req.getSession(false);
-		if (session != null)
-		{
-			sb.append("HTTP session id=" + session.getId());
-			sb.append("\n");
-			Enumeration attributes = session.getAttributeNames();
-			while (attributes.hasMoreElements())
-			{
-				String attr = (String) attributes.nextElement();
-				sb.append("HTTP session: " + attr + "=" + attributes.nextElement());
-				sb.append("\n");
-			}
-		}
-		
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null)
 		{
@@ -62,12 +47,25 @@ public class ServletUtil
 			{
 				if (cookies[i] != null)
 				{
-					sb.append("HTTP request cookie ");
+					sb.append("HTTP request cookie: ");
 					sb.append(toString(cookies[i]));
 					sb.append("\n");
 				}
 			}
 		}
+		
+		HttpSession session = req.getSession(false);
+		if (session != null)
+		{
+			sb.append("HTTP session id=" + session.getId());
+			sb.append("\n");
+			for (String attrName : getAttributeNames(session))
+			{
+				sb.append("HTTP session: " + attrName + "=" + session.getAttribute(attrName));
+				sb.append("\n");
+			}
+		}
+		
 		
 		return sb.toString();
 	}
@@ -87,4 +85,34 @@ public class ServletUtil
 		
 		return sb.toString();
 	}
+	
+	private static List<String> getParameterNames(HttpServletRequest req)
+	{
+		return toList(req.getParameterNames());
+	}
+	
+	private static List<String> getHeaderNames(HttpServletRequest req)
+	{
+		return toList(req.getHeaderNames());
+	}
+	
+	private static List<String> getAttributeNames(HttpSession s)
+	{
+		return toList(s.getAttributeNames());
+	}
+	
+	private static List<String> toList(Enumeration en)
+	{
+		List<String> list = new ArrayList<String>();
+		
+		while (en.hasMoreElements())
+		{
+			list.add( (String) en.nextElement());
+		}
+		
+		Collections.sort(list);
+		
+		return list;
+	}
+	
 }
