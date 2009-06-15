@@ -121,6 +121,21 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		return this.getParameter("DialStatus");
 	}
 
+	public String getTranscriptionText()
+	{
+		return this.getParameter("TranscriptionText");
+	}
+	
+	public String getTranscriptionStatus()
+	{
+		return this.getParameter("TranscriptionStatus");
+	}
+	
+	public String getTranscriptionUrl()
+	{
+		return this.getParameter("TranscriptionUrl");
+	}
+	
 	public boolean isInboundCall()
 	{
 		// todo : return ( (getCalled() != null) || (getCalled().equalsIgnoreCase(getAccountPhoneNumber()));
@@ -146,7 +161,7 @@ public class TwilioRequest extends HttpServletRequestWrapper
 
 	public boolean isTranscribeCallback()
 	{
-		return false; // todo : implement this method
+		return (getTranscriptionStatus() != null);
 	}
 	
 	public boolean isGet()
