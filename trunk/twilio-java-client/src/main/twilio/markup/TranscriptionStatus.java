@@ -23,7 +23,7 @@ public enum TranscriptionStatus
 			TranscriptionStatus ts = TranscriptionStatus.valueOf(s);
 			if (ts == null)
 			{
-				return TranscriptionStatus.FAILED;
+				return FAILED;
 			}
 			else
 			{
