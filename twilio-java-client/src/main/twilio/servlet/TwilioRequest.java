@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import twilio.client.CallStatus;
+import twilio.markup.TranscriptionStatus;
 
 public class TwilioRequest extends HttpServletRequestWrapper
 {
@@ -126,9 +127,11 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		return this.getParameter("TranscriptionText");
 	}
 	
-	public String getTranscriptionStatus()
+	public TranscriptionStatus getTranscriptionStatus()
 	{
-		return this.getParameter("TranscriptionStatus");
+		String ts = this.getParameter("TranscriptionStatus");
+		
+		return TranscriptionStatus.getTranscriptionStatus(ts);
 	}
 	
 	public String getTranscriptionUrl()
