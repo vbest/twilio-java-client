@@ -19,6 +19,10 @@ public class SecurityUtil
 	{
 		String str;
 		
+		if (seq == null)
+		{
+			return new byte[0];
+		}
 		if (seq instanceof String)
 		{
 			str = (String) seq;
