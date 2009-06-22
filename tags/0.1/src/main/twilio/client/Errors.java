@@ -1,0 +1,12 @@
+
+package twilio.client;
+
+/**
+ * 
+ * @see http://www.twilio.com/docs/errors/
+ *
+ */
+public class Errors
+{
+	// todo : implement this
+}
