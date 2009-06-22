@@ -14,7 +14,7 @@
   <groupId>twilio-java-client</groupId>
   <artifactId>twilio-java-client</artifactId>
   <packaging>jar</packaging>
-  <version>0.1</version>
+  <version>0.2-DEV</version>
   <description>Java client for Twilio REST API</description>
   <organization>
     <name>twilio-java-client</name>
