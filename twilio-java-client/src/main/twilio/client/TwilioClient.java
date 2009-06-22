@@ -509,7 +509,7 @@ public class TwilioClient
 		TwilioResponse r = sendTwilioRequest("GET", 
 								this.getTwilioEndpoint() 
 									.append("Accounts/")
-									.append(getOutgoingCallerIds())
+									.append(getAccountSid())
 									.append("/OutgoingCallerIds"),
 								params);
 
