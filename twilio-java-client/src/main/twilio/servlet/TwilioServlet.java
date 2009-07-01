@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import twilio.markup.Constants;
+import twilio.markup.Response;
+
 /**
  * 
  *  This is an abstract class. You'll need to extend it.
@@ -25,12 +28,26 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class TwilioServlet extends HttpServlet
 {
-	private static final long serialVersionUID = 1L;
-
+	static private final long serialVersionUID = 1L;
+	static private ThreadLocal<HttpServletResponse> httpResponseTL = new ThreadLocal<HttpServletResponse>();
+	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException
 	{
-		doTwilioRequest(new TwilioRequest(req), resp);
+		try
+		{
+			httpResponseTL.set(resp);
+			doTwilioRequest(new TwilioRequest(req), resp);
+		}
+		finally
+		{
+			httpResponseTL.remove();
+		}
+	}
+	
+	static public HttpServletResponse getHttpServletResponse()
+	{
+		return httpResponseTL.get();
 	}
 	
 	protected void doTwilioRequest(TwilioRequest req, HttpServletResponse resp) throws IOException
@@ -148,6 +165,32 @@ public abstract class TwilioServlet extends HttpServlet
 			// ignored
 		}
 			
+		
+	}
+	
+	protected void writeTwilioResponse(Response rsp)
+	{
+		writeTwilioResponse(rsp.toXml());
+	}
+	
+	protected void writeTwilioResponse(String response)
+	{
+		HttpServletResponse httpResp = getHttpServletResponse();
+		
+		httpResp.setContentType(Constants.TWILIO_MARKUP_CONTENT_TYPE);
+		
+		PrintWriter writer = null;
+		
+		try
+		{
+			writer = httpResp.getWriter();
+			writer.write(response);
+			writer.flush();
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
 		
 	}
 	
