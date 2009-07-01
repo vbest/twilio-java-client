@@ -187,6 +187,7 @@ public abstract class TwilioServlet extends HttpServlet
 		HttpServletResponse httpResp = getHttpServletResponse();
 		
 		httpResp.setContentType(Constants.TWILIO_MARKUP_CONTENT_TYPE);
+		httpResp.setStatus(HttpServletResponse.SC_OK);
 		
 		PrintWriter writer = null;
 		
