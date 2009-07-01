@@ -101,6 +101,7 @@ public abstract class TwilioServlet extends HttpServlet
 			w.print("?" + req.getQueryString());
 		}
 		w.println();
+		w.flush();
 		
 	}
 
