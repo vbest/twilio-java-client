@@ -77,7 +77,7 @@ public class ServletUtil
 			return "";
 		}
 		
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		
 		sb.append(c.getName());
 		sb.append("=");
