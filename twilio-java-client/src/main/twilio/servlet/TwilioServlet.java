@@ -37,7 +37,7 @@ public abstract class TwilioServlet extends HttpServlet
 		try
 		{
 			httpResponseTL.set(resp);
-			doTwilioRequest(new TwilioRequest(req), resp);
+			doTwilioRequest(new TwilioRequest(req));
 		}
 		finally
 		{
@@ -50,35 +50,33 @@ public abstract class TwilioServlet extends HttpServlet
 		return httpResponseTL.get();
 	}
 	
-	protected void doTwilioRequest(TwilioRequest req, HttpServletResponse resp) throws IOException
+	protected void doTwilioRequest(TwilioRequest req) throws IOException
 	{
-		resp.setContentType(twilio.markup.Constants.TWILIO_MARKUP_CONTENT_TYPE);
-		
 		Response twilioResponse = null;
 		
 		if (req.isDialCallback())
 		{
-			twilioResponse = onDialCallback(req, resp);
+			twilioResponse = onDialCallback(req);
 		}
 		else if (req.isGatherCallback())
 		{
-			twilioResponse = onGatherCallback(req, resp);
+			twilioResponse = onGatherCallback(req);
 		}
 		else if (req.isRecordCallback())
 		{
-			twilioResponse = onRecordCallback(req, resp);
+			twilioResponse = onRecordCallback(req);
 		}
 		else if (req.isInboundCall())
 		{
-			twilioResponse = onInboundCall(req, resp);
+			twilioResponse = onInboundCall(req);
 		}
 		else if (req.isTranscribeCallback())
 		{
-			twilioResponse = onTranscribeCallback(req, resp);
+			twilioResponse = onTranscribeCallback(req);
 		}
 		else 
 		{
-			onUnknownRequest(req, resp);
+			onUnknownRequest(req);
 		}
 		
 		if (twilioResponse != null)
@@ -87,8 +85,10 @@ public abstract class TwilioServlet extends HttpServlet
 		}
 	}
 
-	protected void onUnknownRequest(TwilioRequest req, HttpServletResponse resp) throws IOException
+	protected void onUnknownRequest(TwilioRequest req) throws IOException
 	{
+		HttpServletResponse resp = getHttpServletResponse();
+		
 		resp.setContentType("text/plain");
 		resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		
@@ -100,18 +100,19 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			w.print("?" + req.getQueryString());
 		}
+		w.println();
 		
 	}
 
-	abstract protected Response onRecordCallback(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onRecordCallback(TwilioRequest req);
 
-	abstract protected Response onInboundCall(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onInboundCall(TwilioRequest req);
 
-	abstract protected Response onGatherCallback(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onGatherCallback(TwilioRequest req);
 
-	abstract protected Response onDialCallback(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onDialCallback(TwilioRequest req);
 
-	abstract protected Response onTranscribeCallback(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onTranscribeCallback(TwilioRequest req);
 
 	protected void sendBinaryResponse(HttpServletResponse resp, byte[] data, String mimeType)
 	{
