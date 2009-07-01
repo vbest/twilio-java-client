@@ -1,0 +1,13 @@
+<projectDescription>
+  <name>twilio-java-client</name>
+  <comment>Java client for Twilio REST API</comment>
+  <projects/>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>
