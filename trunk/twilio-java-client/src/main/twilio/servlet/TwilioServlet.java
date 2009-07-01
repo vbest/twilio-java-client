@@ -54,29 +54,36 @@ public abstract class TwilioServlet extends HttpServlet
 	{
 		resp.setContentType(twilio.markup.Constants.TWILIO_MARKUP_CONTENT_TYPE);
 		
+		Response twilioResponse = null;
+		
 		if (req.isDialCallback())
 		{
-			onDialCallback(req, resp);
+			twilioResponse = onDialCallback(req, resp);
 		}
 		else if (req.isGatherCallback())
 		{
-			onGatherCallback(req, resp);
+			twilioResponse = onGatherCallback(req, resp);
 		}
 		else if (req.isRecordCallback())
 		{
-			onRecordCallback(req, resp);
+			twilioResponse = onRecordCallback(req, resp);
 		}
 		else if (req.isInboundCall())
 		{
-			onInboundCall(req, resp);
+			twilioResponse = onInboundCall(req, resp);
 		}
 		else if (req.isTranscribeCallback())
 		{
-			onTranscribeCallback(req, resp);
+			twilioResponse = onTranscribeCallback(req, resp);
 		}
 		else 
 		{
 			onUnknownRequest(req, resp);
+		}
+		
+		if (twilioResponse != null)
+		{
+			writeTwilioResponse(twilioResponse);
 		}
 	}
 
@@ -96,15 +103,15 @@ public abstract class TwilioServlet extends HttpServlet
 		
 	}
 
-	abstract protected void onRecordCallback(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onRecordCallback(TwilioRequest req, HttpServletResponse resp);
 
-	abstract protected void onInboundCall(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onInboundCall(TwilioRequest req, HttpServletResponse resp);
 
-	abstract protected void onGatherCallback(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onGatherCallback(TwilioRequest req, HttpServletResponse resp);
 
-	abstract protected void onDialCallback(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onDialCallback(TwilioRequest req, HttpServletResponse resp);
 
-	abstract protected void onTranscribeCallback(TwilioRequest req, HttpServletResponse resp);
+	abstract protected Response onTranscribeCallback(TwilioRequest req, HttpServletResponse resp);
 
 	protected void sendBinaryResponse(HttpServletResponse resp, byte[] data, String mimeType)
 	{
