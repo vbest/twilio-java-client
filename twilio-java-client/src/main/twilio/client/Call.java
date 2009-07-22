@@ -1,10 +1,9 @@
 
 package twilio.client;
 
-import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.Date;
 
-public class Call
+public class Call implements java.io.Serializable
 {
 	private String sid;
 	private String accountSid;
@@ -12,12 +11,12 @@ public class Call
 	private String caller;
 	private String phoneNumberSid;
 	private Integer status;
-	private Calendar startTime;
-	private Calendar endTime;
-	private Calendar dateCreated;
-	private Calendar dateUpdated;
+	private Date startTime;
+	private Date endTime;
+	private Date dateCreated;
+	private Date dateUpdated;
 	private Integer duration;
-	private BigDecimal price;
+	private Double price;
 	private Integer flags;
 	private String callSegmentSid;
 	private String annotation;
@@ -99,22 +98,22 @@ public class Call
 		this.status = s;
 	}
 	
-	public Calendar getStartTime()
+	public Date getStartTime()
 	{
 		return startTime;
 	}
 	
-	public void setStartTime(Calendar startTime)
+	public void setStartTime(Date startTime)
 	{
 		this.startTime = startTime;
 	}
 	
-	public Calendar getEndTime()
+	public Date getEndTime()
 	{
 		return endTime;
 	}
 	
-	public void setEndTime(Calendar endTime)
+	public void setEndTime(Date endTime)
 	{
 		this.endTime = endTime;
 	}
@@ -129,12 +128,12 @@ public class Call
 		this.duration = duration;
 	}
 	
-	public BigDecimal getPrice()
+	public Double getPrice()
 	{
 		return price;
 	}
 	
-	public void setPrice(BigDecimal price)
+	public void setPrice(Double price)
 	{
 		this.price = price;
 	}
@@ -147,22 +146,22 @@ public class Call
 		this.flags = flags;
 	}
 
-	public Calendar getDateCreated()
+	public Date getDateCreated()
 	{
 		return dateCreated;
 	}
 	
-	public void setDateCreated(Calendar dateCreated)
+	public void setDateCreated(Date dateCreated)
 	{
 		this.dateCreated = dateCreated;
 	}
 	
-	public Calendar getDateUpdated()
+	public Date getDateUpdated()
 	{
 		return dateUpdated;
 	}
 	
-	public void setDateUpdated(Calendar dateUpdated)
+	public void setDateUpdated(Date dateUpdated)
 	{
 		this.dateUpdated = dateUpdated;
 	}
@@ -204,6 +203,7 @@ public class Call
 	
 	public String toString()
 	{
-		return ToStringBuilder.build(this);
+		// return ToStringBuilder.build(this);
+		return "";
 	}
 }

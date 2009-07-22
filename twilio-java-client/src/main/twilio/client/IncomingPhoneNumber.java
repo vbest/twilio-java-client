@@ -9,7 +9,7 @@ import java.util.*;
  * given to you by Twilio to receive incoming phone calls. 
  *
  */
-public class IncomingPhoneNumber
+public class IncomingPhoneNumber implements java.io.Serializable
 {
 	private String sid;
 	private String accountSid;
@@ -17,8 +17,8 @@ public class IncomingPhoneNumber
 	private String phoneNumber;
 	private String url;
 	private String method;
-	private Calendar dateCreated;
-	private Calendar dateUpdated;
+	private Date dateCreated;
+	private Date dateUpdated;
 
 	public String getSid()
 	{
@@ -104,28 +104,28 @@ public class IncomingPhoneNumber
 
 
 
-	public Calendar getDateCreated()
+	public Date getDateCreated()
 	{
 		return dateCreated;
 	}
 
 
 
-	public void setDateCreated(Calendar dateCreated)
+	public void setDateCreated(Date dateCreated)
 	{
 		this.dateCreated = dateCreated;
 	}
 
 
 
-	public Calendar getDateUpdated()
+	public Date getDateUpdated()
 	{
 		return dateUpdated;
 	}
 
 
 
-	public void setDateUpdated(Calendar dateUpdated)
+	public void setDateUpdated(Date dateUpdated)
 	{
 		this.dateUpdated = dateUpdated;
 	}
@@ -134,7 +134,8 @@ public class IncomingPhoneNumber
 
 	public String toString()
 	{
-		return ToStringBuilder.build(this);
+		// return ToStringBuilder.build(this);
+		return "";
 	}
 	
 }

@@ -3,11 +3,11 @@ package twilio.client;
 
 import java.util.*;
 
-public class Account
+public class Account implements java.io.Serializable
 {
 	private String sid;
-	private Calendar dateCreated;
-	private Calendar dateUpdated;
+	private Date dateCreated;
+	private Date dateUpdated;
 	private String friendlyName;
 	private Integer status;
 	private String statusText;
@@ -23,22 +23,22 @@ public class Account
 		this.sid = sid;
 	}
 	
-	public Calendar getDateCreated()
+	public Date getDateCreated()
 	{
 		return dateCreated;
 	}
 	
-	public void setDateCreated(Calendar dateCreated)
+	public void setDateCreated(Date dateCreated)
 	{
 		this.dateCreated = dateCreated;
 	}
 	
-	public Calendar getDateUpdated()
+	public Date getDateUpdated()
 	{
 		return dateUpdated;
 	}
 	
-	public void setDateUpdated(Calendar dateUpdated)
+	public void setDateUpdated(Date dateUpdated)
 	{
 		this.dateUpdated = dateUpdated;
 	}
@@ -86,7 +86,8 @@ public class Account
 	
 	public String toString()
 	{
-		return ToStringBuilder.build(this);
+		// return ToStringBuilder.build(this);
+		return "";
 	}
 
 	public boolean isActive()

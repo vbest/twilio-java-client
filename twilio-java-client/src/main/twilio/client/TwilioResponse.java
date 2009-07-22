@@ -1,7 +1,7 @@
 
 package twilio.client;
 
-public class TwilioResponse
+public class TwilioResponse implements java.io.Serializable
 {
 	
 	private TwilioException exception;
@@ -23,7 +23,8 @@ public class TwilioResponse
 
 	public String toString()
 	{
-		return "todo";
+		// return ToStringBuilder.build(this);
+		return "";
 	}
 
 
