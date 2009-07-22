@@ -31,9 +31,11 @@ public class XStreamFactory
 			}
 		};
 		
- 		xstream.registerConverter(new CalendarConverter(), XStream.PRIORITY_VERY_HIGH);
  		xstream.registerConverter(new IntConverter(), XStream.PRIORITY_VERY_HIGH);
- 		xstream.registerConverter(new BigDecimalConverter(), XStream.PRIORITY_VERY_HIGH);
+ 		xstream.registerConverter(new DateConverter(), XStream.PRIORITY_VERY_HIGH);
+ 		xstream.registerConverter(new DoubleConverter(), XStream.PRIORITY_VERY_HIGH);
+ 		// xstream.registerConverter(new BigDecimalConverter(), XStream.PRIORITY_VERY_HIGH);
+ 		// xstream.registerConverter(new CalendarConverter(), XStream.PRIORITY_VERY_HIGH);
  		
  		xstream.registerConverter(new TwilioListConverter(xstream.getMapper()), XStream.PRIORITY_VERY_HIGH);
  		
