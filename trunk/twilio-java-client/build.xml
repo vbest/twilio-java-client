@@ -1,0 +1,27 @@
+<project name="twilio-java-client" default="build" basedir=".">
+    <description>
+        Ant build file
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src/main"/>
+  <property name="output" location="target/classes"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${output}"/>
+  </target>
+
+  <target name="build" depends="init,copysourcefiles">
+  </target>
+
+  <target name="copysourcefiles" depends="init">
+  	<copy todir="${output}">
+  	    <fileset dir="${src}">
+  	      <include name="twilio/client/*.java"/>
+  	      <include name="twilio/internal/**/*.java"/>
+  	    </fileset>
+  	  </copy>  
+  </target>
+</project>
