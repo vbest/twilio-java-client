@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import twilio.markup.Constants;
+import twilio.markup.Hangup;
 import twilio.markup.Response;
+import twilio.markup.Say;
+import twilio.markup.Verb;
 
 /**
  * 
@@ -30,12 +33,14 @@ public abstract class TwilioServlet extends HttpServlet
 {
 	static private final long serialVersionUID = 1L;
 	static private ThreadLocal<HttpServletResponse> httpResponseTL = new ThreadLocal<HttpServletResponse>();
+	static private ThreadLocal<Response> twilioResponseTL = new ThreadLocal<Response>();
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException
 	{
 		try
 		{
+			setTwilioResponse(new Response());
 			httpResponseTL.set(resp);
 			doTwilioRequest(new TwilioRequest(req));
 		}
@@ -45,6 +50,31 @@ public abstract class TwilioServlet extends HttpServlet
 		}
 	}
 	
+	static public Response getTwilioResponse()
+	{
+		return twilioResponseTL.get();
+	}
+	
+	static public void setTwilioResponse(Response r)
+	{
+		twilioResponseTL.set(r);
+	}
+	
+	protected Response say(String msg)
+	{
+		return add(new Say(msg));
+	}
+	
+	protected Response hangup()
+	{
+		return add(new Hangup());
+	}
+	
+	protected Response add(Verb v)
+	{
+		return getTwilioResponse().add(v);
+	}
+	
 	static public HttpServletResponse getHttpServletResponse()
 	{
 		return httpResponseTL.get();
@@ -52,36 +82,37 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected void doTwilioRequest(TwilioRequest req) throws IOException
 	{
-		Response twilioResponse = null;
 		
 		if (req.isDialCallback())
 		{
-			twilioResponse = onDialCallback(req);
+			onDialCallback(req);
 		}
 		else if (req.isGatherCallback())
 		{
-			twilioResponse = onGatherCallback(req);
+			onGatherCallback(req);
 		}
 		else if (req.isRecordCallback())
 		{
-			twilioResponse = onRecordCallback(req);
+			onRecordCallback(req);
 		}
 		else if (req.isInboundCall())
 		{
-			twilioResponse = onInboundCall(req);
+			onInboundCall(req);
 		}
 		else if (req.isTranscribeCallback())
 		{
-			twilioResponse = onTranscribeCallback(req);
+			onTranscribeCallback(req);
 		}
 		else 
 		{
+			setTwilioResponse(null);
 			onUnknownRequest(req);
+			
 		}
 		
-		if (twilioResponse != null)
+		if (getTwilioResponse() != null)
 		{
-			writeTwilioResponse(twilioResponse);
+			writeTwilioResponse(getTwilioResponse());
 		}
 	}
 
@@ -105,15 +136,15 @@ public abstract class TwilioServlet extends HttpServlet
 		
 	}
 
-	abstract protected Response onRecordCallback(TwilioRequest req);
+	abstract protected void onRecordCallback(TwilioRequest req);
 
-	abstract protected Response onInboundCall(TwilioRequest req);
+	abstract protected void onInboundCall(TwilioRequest req);
 
-	abstract protected Response onGatherCallback(TwilioRequest req);
+	abstract protected void onGatherCallback(TwilioRequest req);
 
-	abstract protected Response onDialCallback(TwilioRequest req);
+	abstract protected void onDialCallback(TwilioRequest req);
 
-	abstract protected Response onTranscribeCallback(TwilioRequest req);
+	abstract protected void onTranscribeCallback(TwilioRequest req);
 
 	protected void sendBinaryResponse(HttpServletResponse resp, byte[] data, String mimeType)
 	{
