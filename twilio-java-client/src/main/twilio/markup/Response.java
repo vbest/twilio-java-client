@@ -39,6 +39,12 @@ public class Response
 		this.add(verbs);
 	}
 	
+	public Response say(String msg)
+	{
+		return this.add(new Say(msg));
+	}
+	
+	
 	public Response add(Verb v)
 	{
 		verbs.add(v);
