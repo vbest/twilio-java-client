@@ -6,5 +6,6 @@
     <exclude name="**/TwilioClient.java" />
     <exclude name="**/ToStringBuilder.java" />
     <exclude name="**/DateUtil.java" />
+    <exclude name="**/TwilioResponse.java" />
   </source>
 </module>
