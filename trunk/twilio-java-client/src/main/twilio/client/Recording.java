@@ -3,14 +3,14 @@ package twilio.client;
 
 import java.util.*;
 
-public class Recording
+public class Recording implements java.io.Serializable
 {
 	private String sid;
 	private String accountSid;
 	private String callSid;
 	private Integer duration;
-	private Calendar dateCreated;
-	private Calendar dateUpdated;
+	private Date dateCreated;
+	private Date dateUpdated;
 	
 	public String getSid()
 	{
@@ -52,28 +52,29 @@ public class Recording
 		this.duration = duration;
 	}
 	
-	public Calendar getDateCreated()
+	public Date getDateCreated()
 	{
 		return dateCreated;
 	}
 	
-	public void setDateCreated(Calendar dateCreated)
+	public void setDateCreated(Date dateCreated)
 	{
 		this.dateCreated = dateCreated;
 	}
 	
-	public Calendar getDateUpdated()
+	public Date getDateUpdated()
 	{
 		return dateUpdated;
 	}
 	
-	public void setDateUpdated(Calendar dateUpdated)
+	public void setDateUpdated(Date dateUpdated)
 	{
 		this.dateUpdated = dateUpdated;
 	}
 
 	public String toString()
 	{
-		return ToStringBuilder.build(this);
+		// return ToStringBuilder.build(this);
+		return "";
 	}
 }

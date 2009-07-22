@@ -40,6 +40,7 @@ public class ValidationRequest
 
 	public String toString()
 	{
-		return ToStringBuilder.build(this);
+		// return ToStringBuilder.build(this);
+		return "";
 	}
 }

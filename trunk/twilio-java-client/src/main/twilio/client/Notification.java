@@ -3,7 +3,7 @@ package twilio.client;
 
 import java.util.*;
 
-public class Notification
+public class Notification implements java.io.Serializable
 {
  
 	private String sid;
@@ -15,7 +15,7 @@ public class Notification
 	private String requestUrl;
 	private String requestMethod;
 	private String messageText;
-	private Calendar messageDate;
+	private Date messageDate;
 	
 	public String getSid()
 	{
@@ -89,11 +89,11 @@ public class Notification
 	{
 		this.messageText = messageText;
 	}
-	public Calendar getMessageDate()
+	public Date getMessageDate()
 	{
 		return messageDate;
 	}
-	public void setMessageDate(Calendar messageDate)
+	public void setMessageDate(Date messageDate)
 	{
 		this.messageDate = messageDate;
 	}
@@ -101,7 +101,8 @@ public class Notification
 	
 	public String toString()
 	{
-		return ToStringBuilder.build(this);
+		// return ToStringBuilder.build(this);
+		return "";
 	}
 	
 	public  final boolean isError()

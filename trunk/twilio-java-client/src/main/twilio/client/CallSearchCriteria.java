@@ -1,10 +1,10 @@
 
 package twilio.client;
 
-import java.text.SimpleDateFormat;
+// import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class CallSearchCriteria
+public class CallSearchCriteria implements java.io.Serializable
 {
 	private static final String DATE_FORMAT = "yyyy-MM-dd";
 	private String called;
@@ -27,11 +27,12 @@ public class CallSearchCriteria
 	}
 
 
+	/*
 	private static String format(Calendar c)
 	{
 		SimpleDateFormat f = new SimpleDateFormat(DATE_FORMAT);
 		return f.format(c.getTime());
-	}
+	} */
 	
 	public String getCaller()
 	{
@@ -67,11 +68,11 @@ public class CallSearchCriteria
 	}
 
 
-
+/*
 	public void setStartTime(Calendar c)
 	{
 		setStartTime(format(c));
-	}
+	} */
 	
 	public void setStartTime(String startTime)
 	{
@@ -85,11 +86,11 @@ public class CallSearchCriteria
 		return endTime;
 	}
 
-
+/*
 	public void setEndTime(Calendar c)
 	{
 		setEndTime(format(c));
-	}
+	} */
 	
 	public void setEndTime(String endTime)
 	{
