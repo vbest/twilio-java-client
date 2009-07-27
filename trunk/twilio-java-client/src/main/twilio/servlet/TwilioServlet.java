@@ -108,10 +108,14 @@ public abstract class TwilioServlet extends HttpServlet
 		return play(url, 1);
 	}
 	
-	protected Response dial(CharSequence number)
+	protected Response dial(CharSequence... numbers)
 	{
 		Dial d = new Dial();
-		d.add(number);
+		
+		for (CharSequence num : numbers)
+		{
+			d.add(num);
+		}
 		
 		return add(d);
 	}
