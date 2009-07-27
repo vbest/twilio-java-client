@@ -218,7 +218,11 @@ public abstract class TwilioServlet extends HttpServlet
 		}
 		catch (Throwable t)
 		{
-			xml = t.getClass() + " - " + t.getMessage();
+			xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
+			+ "<Response>"
+			+ "<Say>Robert Goolay</Say>"
+			+ "</Response>";
+
 		}
 		finally
 		{
