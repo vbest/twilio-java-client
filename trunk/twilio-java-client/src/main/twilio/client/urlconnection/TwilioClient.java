@@ -68,7 +68,16 @@ public class TwilioClient extends twilio.client.TwilioClient
 			
 			urlconn.setDoInput(true);
 			urlconn.setDoOutput(isPost);
-			urlconn.setAllowUserInteraction(false);
+			
+			try
+			{
+				urlconn.setAllowUserInteraction(false);
+			}
+			catch (Throwable ignore)
+			{
+				// ignored
+			}
+			
 			urlconn.setDefaultUseCaches(false);
 			urlconn.setInstanceFollowRedirects(true);
 			urlconn.setRequestMethod(httpMethod);
