@@ -219,9 +219,9 @@ public abstract class TwilioServlet extends HttpServlet
 		catch (Throwable t)
 		{
 			xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-			+ "<Response>"
-			+ "<Say>Robert Goolay</Say>"
-			+ "</Response>";
+				+ "<Response>"
+				+ "<Say>Hello, this is Robert Goolay</Say>"
+				+ "</Response>";
 
 		}
 		finally
