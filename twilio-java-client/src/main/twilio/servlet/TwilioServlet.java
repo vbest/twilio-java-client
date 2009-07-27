@@ -210,7 +210,20 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected void writeTwilioResponse(Response rsp)
 	{
-		writeTwilioResponse(rsp.toXml());
+		String xml = "";
+		
+		try
+		{
+			rsp.toXml();
+		}
+		catch (Throwable t)
+		{
+			xml = t.getClass() + " - " + t.getMessage();
+		}
+		finally
+		{
+			writeTwilioResponse(xml);
+		}
 	}
 	
 	protected void writeTwilioResponse(String response)
