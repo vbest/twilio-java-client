@@ -64,6 +64,10 @@ public class TwilioClient extends twilio.client.TwilioClient
 				u = new URL(buildUrl(url, params));
 			}
 	
+
+			System.out.println("URL: " + u);
+			
+
 			HttpURLConnection urlconn = (HttpURLConnection) u.openConnection();
 			
 			urlconn.setDoInput(true);
