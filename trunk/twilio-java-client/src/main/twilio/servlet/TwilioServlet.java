@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import twilio.markup.Constants;
 import twilio.markup.Hangup;
+import twilio.markup.Pause;
 import twilio.markup.Response;
 import twilio.markup.Say;
 import twilio.markup.Verb;
@@ -87,6 +88,17 @@ public abstract class TwilioServlet extends HttpServlet
 	protected Response add(Verb v)
 	{
 		return getTwilioResponse().add(v);
+	}
+	
+	protected Response pause(int seconds)
+	{
+		if (seconds < 0)
+		{
+			seconds = 0;
+		}
+		
+		Pause p = new Pause(seconds);
+		return add(p);
 	}
 	
 	static public HttpServletResponse getHttpServletResponse()
@@ -234,7 +246,7 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
 				+ "<Response>"
-				+ "<Say loop=\"3\" voice=\"woman\">Nom nom nom</Say>"
+				+ "<Say loop=\"1\" voice=\"man\">A man a plan a canal Panama</Say>"
 				+ "</Response>";
 
 		}
