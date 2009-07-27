@@ -10,6 +10,7 @@ import twilio.markup.Say;
 import twilio.internal.xstream.TwilioConverter;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
 
@@ -23,7 +24,7 @@ public class XStreamFactory
 		
 		// todo : use XppDriver 
 		
-		xstream = new XStream(new DomDriver())
+		xstream = new XStream(new PureJavaReflectionProvider(), new DomDriver())
 		{
 			protected MapperWrapper wrapMapper(MapperWrapper next)
 			{
@@ -64,7 +65,7 @@ public class XStreamFactory
 
 	public static XStream createMarkupXStream()
 	{
-		XStream xstream = new XStream(new DomDriver());
+		XStream xstream = new XStream(new PureJavaReflectionProvider(), new DomDriver());
 		
 		xstream.registerConverter(new TwilioConverter(xstream.getMapper(), Dial.class, "phoneNumber"), XStream.PRIORITY_VERY_HIGH);
 		xstream.registerConverter(new TwilioConverter(xstream.getMapper(), Play.class, "url"), XStream.PRIORITY_VERY_HIGH);
