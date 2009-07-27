@@ -16,6 +16,7 @@ import twilio.markup.Hangup;
 import twilio.markup.Response;
 import twilio.markup.Say;
 import twilio.markup.Verb;
+import twilio.markup.Voice;
 
 /**
  * 
@@ -62,7 +63,20 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected Response say(String msg)
 	{
-		return add(new Say(msg));
+		return say(msg, Voice.MAN);
+	}
+	
+	protected Response say(String msg, Voice v)
+	{
+		return say(msg, v, 1);
+	}
+	
+	protected Response say(String msg, Voice v, int loop)
+	{
+		Say s = new Say(msg);
+		s.setVoice(v);
+		s.setLoop(loop);
+		return add(s);
 	}
 	
 	protected Response hangup()
@@ -220,7 +234,7 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
 				+ "<Response>"
-				+ "<Say>Hello, this is Robert Goolay</Say>"
+				+ "<Say voice=\"man\">Nom nom nom</Say>"
 				+ "</Response>";
 
 		}
