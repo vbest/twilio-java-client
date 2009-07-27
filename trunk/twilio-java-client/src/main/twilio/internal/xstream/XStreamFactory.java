@@ -64,7 +64,7 @@ public class XStreamFactory
 
 	public static XStream createMarkupXStream()
 	{
-		XStream xstream = new XStream();
+		XStream xstream = new XStream(new DomDriver());
 		
 		xstream.registerConverter(new TwilioConverter(xstream.getMapper(), Dial.class, "phoneNumber"), XStream.PRIORITY_VERY_HIGH);
 		xstream.registerConverter(new TwilioConverter(xstream.getMapper(), Play.class, "url"), XStream.PRIORITY_VERY_HIGH);
