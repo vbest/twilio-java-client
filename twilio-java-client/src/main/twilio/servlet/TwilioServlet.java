@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import twilio.markup.Constants;
+import twilio.markup.Dial;
 import twilio.markup.Hangup;
 import twilio.markup.Pause;
 import twilio.markup.Play;
@@ -105,6 +106,14 @@ public abstract class TwilioServlet extends HttpServlet
 	protected Response play(CharSequence url)
 	{
 		return play(url, 1);
+	}
+	
+	protected Response dial(CharSequence number)
+	{
+		Dial d = new Dial();
+		d.add(number);
+		
+		return add(d);
 	}
 	
 	protected Response play(CharSequence url, int loop)
