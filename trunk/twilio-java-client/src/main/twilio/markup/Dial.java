@@ -28,6 +28,11 @@ public class Dial extends Verb
 		phoneNumber = phoneNum;
 	}
 
+	public void add(CharSequence number)
+	{
+		this.add(new Number(number));
+	}
+	
 	public void add(Number n)
 	{
 		this.numbers.add(n);
