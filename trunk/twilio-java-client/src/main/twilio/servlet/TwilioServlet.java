@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import twilio.markup.Constants;
 import twilio.markup.Hangup;
 import twilio.markup.Pause;
+import twilio.markup.Play;
 import twilio.markup.Response;
 import twilio.markup.Say;
 import twilio.markup.Verb;
@@ -98,6 +99,21 @@ public abstract class TwilioServlet extends HttpServlet
 		}
 		
 		Pause p = new Pause(seconds);
+		return add(p);
+	}
+	
+	protected Response play(CharSequence url)
+	{
+		return play(url, 1);
+	}
+	
+	protected Response play(CharSequence url, int loop)
+	{
+		
+		Play p = new Play();
+		p.setLoop(loop);
+		p.setUrl(url);
+		
 		return add(p);
 	}
 	
