@@ -234,7 +234,7 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
 				+ "<Response>"
-				+ "<Say loop=\"3\" voice=\"man\">Nom nom nom</Say>"
+				+ "<Say loop=\"3\" voice=\"woman\">Nom nom nom</Say>"
 				+ "</Response>";
 
 		}
