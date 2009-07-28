@@ -7,7 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 @XStreamAlias("Redirect")
 public class Redirect extends Verb
 {
-	private String url;
+	private CharSequence url;
 
 	@XStreamAlias("method")
 	@XStreamAsAttribute
@@ -18,7 +18,7 @@ public class Redirect extends Verb
 		super();
 	}
 	
-	public Redirect(String url)
+	public Redirect(CharSequence url)
 	{
 		this.setUrl(url);
 	}
@@ -35,13 +35,13 @@ public class Redirect extends Verb
 	}
 
 
-	public String getUrl()
+	public CharSequence getUrl()
 	{
 		return url;
 	}
 
 
-	public void setUrl(String u)
+	public void setUrl(CharSequence u)
 	{
 		this.url = u;
 	}
