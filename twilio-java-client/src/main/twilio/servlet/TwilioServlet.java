@@ -191,10 +191,12 @@ public abstract class TwilioServlet extends HttpServlet
 		
 		w.println("unexpected request");
 		w.print("Request URL: " + req.getRequestURL());
+		
 		if (req.getQueryString() != null)
 		{
 			w.print("?" + req.getQueryString());
 		}
+		
 		w.println();
 		w.flush();
 		
@@ -284,6 +286,8 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
 				+ "<Response>"
+				+ "<Say loop=\"1\" voice=\"man\">One small step for man, one giant leap for mankind</Say>"
+				+ "<Pause length=\"2\"></Pause>"
 				+ "<Say loop=\"1\" voice=\"man\">One small step for man, one giant leap for mankind</Say>"
 				+ "</Response>";
 
