@@ -12,6 +12,11 @@ public enum TranscriptionStatus
 		this.description = descriptionText;
 	}
 	
+	public String getDescription()
+	{
+		return this.description;
+	}
+	
 	public static TranscriptionStatus getTranscriptionStatus(String s)
 	{
 		if (s == null)
