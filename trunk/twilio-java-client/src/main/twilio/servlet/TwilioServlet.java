@@ -16,6 +16,7 @@ import twilio.markup.Dial;
 import twilio.markup.Hangup;
 import twilio.markup.Pause;
 import twilio.markup.Play;
+import twilio.markup.Redirect;
 import twilio.markup.Response;
 import twilio.markup.Say;
 import twilio.markup.Verb;
@@ -106,6 +107,14 @@ public abstract class TwilioServlet extends HttpServlet
 	protected Response play(CharSequence url)
 	{
 		return play(url, 1);
+	}
+	
+	protected Response redirect(CharSequence url)
+	{
+		Redirect r = new Redirect();
+		r.setUrl(url);
+		
+		return add(r);
 	}
 	
 	protected Response dial(CharSequence... numbers)
