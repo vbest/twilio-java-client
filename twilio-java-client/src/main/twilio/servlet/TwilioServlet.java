@@ -71,17 +71,27 @@ public abstract class TwilioServlet extends HttpServlet
 		twilioResponseTL.set(r);
 	}
 	
-	protected Response say(String msg)
+	protected Response say(CharSequence msg)
 	{
 		return say(msg, Voice.MAN);
 	}
 	
-	protected Response say(String msg, Voice v)
+	protected Response say(String[] messages)
+	{
+		for (String msg : messages)
+		{
+			say(msg, Voice.MAN);
+		}
+		
+		return getTwilioResponse();
+	}
+	
+	protected Response say(CharSequence msg, Voice v)
 	{
 		return say(msg, v, 1);
 	}
 	
-	protected Response say(String msg, Voice v, int loop)
+	protected Response say(CharSequence msg, Voice v, int loop)
 	{
 		Say s = new Say(msg);
 		s.setVoice(v);
