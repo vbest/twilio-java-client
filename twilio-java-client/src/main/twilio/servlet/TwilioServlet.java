@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,9 @@ import twilio.markup.Voice;
  */
 public abstract class TwilioServlet extends HttpServlet
 {
+	private static final Logger log =
+	      Logger.getLogger(TwilioServlet.class.getName());
+	
 	static private final long serialVersionUID = 1L;
 	static private ThreadLocal<HttpServletResponse> httpResponseTL = new ThreadLocal<HttpServletResponse>();
 	static private ThreadLocal<Response> twilioResponseTL = new ThreadLocal<Response>();
@@ -47,7 +51,7 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			setTwilioResponse(new Response());
 			httpResponseTL.set(resp);
-			doTwilioRequest(new TwilioRequest(req));
+			doTwilioRequest(new TwilioRequest(req, getTwilioAccountPhoneNumber()));
 		}
 		finally
 		{
@@ -55,6 +59,8 @@ public abstract class TwilioServlet extends HttpServlet
 		}
 	}
 	
+	abstract protected String getTwilioAccountPhoneNumber();
+
 	static public Response getTwilioResponse()
 	{
 		return twilioResponseTL.get();
@@ -146,10 +152,15 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected void doTwilioRequest(TwilioRequest req) throws IOException
 	{
+		log.info("doTwilioRequest called");
 		
 		if (req.isDialCallback())
 		{
 			onDialCallback(req);
+		}
+		else if (req.isInboundCall())
+		{
+			onInboundCall(req);
 		}
 		else if (req.isGatherCallback())
 		{
@@ -158,10 +169,6 @@ public abstract class TwilioServlet extends HttpServlet
 		else if (req.isRecordCallback())
 		{
 			onRecordCallback(req);
-		}
-		else if (req.isInboundCall())
-		{
-			onInboundCall(req);
 		}
 		else if (req.isTranscribeCallback())
 		{
@@ -182,6 +189,8 @@ public abstract class TwilioServlet extends HttpServlet
 
 	protected void onUnknownRequest(TwilioRequest req) throws IOException
 	{
+		log.info("onUnknownRequest called");
+		
 		HttpServletResponse resp = getHttpServletResponse();
 		
 		resp.setContentType("text/plain");
@@ -280,16 +289,13 @@ public abstract class TwilioServlet extends HttpServlet
 		
 		try
 		{
-			rsp.toXml();
+			xml = rsp.toXml();
 		}
 		catch (Throwable t)
 		{
-			xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-				+ "<Response>"
-				+ "<Say loop=\"1\" voice=\"man\">One small step for man, one giant leap for mankind</Say>"
-				+ "<Pause length=\"2\"></Pause>"
-				+ "<Say loop=\"1\" voice=\"man\">One small step for man, one giant leap for mankind</Say>"
-				+ "</Response>";
+			xml = "<!-- fail: "
+				+ t.getClass().getName()
+				+ " -->";
 
 		}
 		finally
@@ -300,6 +306,8 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected void writeTwilioResponse(String response)
 	{
+		log.info("TwiML response: " + response);
+		
 		HttpServletResponse httpResp = getHttpServletResponse();
 		
 		httpResp.setContentType(Constants.TWILIO_MARKUP_CONTENT_TYPE);

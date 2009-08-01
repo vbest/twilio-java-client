@@ -9,10 +9,12 @@ import twilio.markup.TranscriptionStatus;
 
 public class TwilioRequest extends HttpServletRequestWrapper
 {
-
-	public TwilioRequest(HttpServletRequest request)
+	private String twilioAccountPhoneNumber = null;
+	
+	public TwilioRequest(HttpServletRequest request, String twilioAccountPhoneNum)
 	{
 		super(request);
+		this.twilioAccountPhoneNumber = twilioAccountPhoneNum;
 	}
 
 	public String getCallGuid()
@@ -40,6 +42,11 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		return this.getParameter("CallStatus");
 	}
 	
+	public boolean isCallInProgress()
+	{
+		return "in-progress".equalsIgnoreCase(getCallStatusParameter());
+	}
+	
 	public CallStatus getCallStatus()
 	{
 		if (getCallStatusParameter() == null)
@@ -50,7 +57,7 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		{
 			CallStatus status = new CallStatus();
 			
-			// todo : code here
+			
 			
 			return status;
 		}
@@ -141,14 +148,14 @@ public class TwilioRequest extends HttpServletRequestWrapper
 	
 	public boolean isInboundCall()
 	{
-		// todo : return ( (getCalled() != null) || (getCalled().equalsIgnoreCase(getAccountPhoneNumber()));
-		
-		return true;
+		return ( (getCallStatusParameter() != null) 
+				  && (getCalled().equalsIgnoreCase(twilioAccountPhoneNumber)));
 	}
 	
 	public boolean isDialCallback()
 	{
-		return (getDialStatus() != null);
+		return ( (getCallStatusParameter() != null) 
+				  && (!getCalled().equalsIgnoreCase(twilioAccountPhoneNumber)));
 	}
 	
 	public boolean isRecordCallback()
