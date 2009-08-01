@@ -85,6 +85,17 @@ public abstract class TwilioServlet extends HttpServlet
 		
 		return getTwilioResponse();
 	}
+
+	protected Response say(java.util.Collection<? extends CharSequence> messages)
+	{
+		for (CharSequence msg : messages)
+		{
+			say(msg, Voice.MAN);
+		}
+		
+		return getTwilioResponse();
+	}
+	
 	
 	protected Response say(CharSequence msg, Voice v)
 	{
