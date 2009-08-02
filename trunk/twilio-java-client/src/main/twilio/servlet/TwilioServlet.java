@@ -173,7 +173,7 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected void doTwilioRequest(TwilioRequest req) throws IOException
 	{
-		log.info("doTwilioRequest called");
+		log.info("doTwilioRequest called\n\n" + ServletUtil.toString(req));
 		
 		if (req.isDialCallback())
 		{
