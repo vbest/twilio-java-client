@@ -101,7 +101,7 @@ public class ServletUtil
 		return toList(s.getAttributeNames());
 	}
 	
-	private static List<String> toList(Enumeration en)
+	private static List<String> toList(Enumeration<?> en)
 	{
 		List<String> list = new ArrayList<String>();
 		
