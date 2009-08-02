@@ -32,6 +32,8 @@ public class XStreamFactory
 			}
 		};
 		
+		xstream.autodetectAnnotations(true);
+		
  		xstream.registerConverter(new IntConverter(), XStream.PRIORITY_VERY_HIGH);
  		xstream.registerConverter(new DateConverter(), XStream.PRIORITY_VERY_HIGH);
  		xstream.registerConverter(new DoubleConverter(), XStream.PRIORITY_VERY_HIGH);
