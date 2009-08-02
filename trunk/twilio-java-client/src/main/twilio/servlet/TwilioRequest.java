@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import twilio.client.CallStatus;
+import twilio.client.DialStatus;
 import twilio.markup.TranscriptionStatus;
 
 public class TwilioRequest extends HttpServletRequestWrapper
@@ -124,9 +125,9 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		return this.getParameter("X-Twilio-Signature");
 	}
 
-	public String getDialStatus()
+	public DialStatus getDialStatus()
 	{
-		return this.getParameter("DialStatus");
+		return DialStatus.getDialStatus(this.getParameter("DialStatus"));
 	}
 
 	public String getTranscriptionText()
