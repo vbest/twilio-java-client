@@ -71,6 +71,10 @@ public class Util
 	
 	public static String getStateName(String stateCode)
 	{
+		if (stateCode != null)
+		{
+			stateCode = stateCode.toUpperCase();
+		}
 		return states.get(stateCode);
 	}
 }
