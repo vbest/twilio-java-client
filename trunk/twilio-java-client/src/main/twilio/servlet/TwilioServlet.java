@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import twilio.client.DialStatus;
 import twilio.markup.Constants;
 import twilio.markup.Dial;
 import twilio.markup.Hangup;
@@ -177,7 +178,7 @@ public abstract class TwilioServlet extends HttpServlet
 		
 		if (req.isDialCallback())
 		{
-			onDialCallback(req);
+			onDialCallback(req, req.getDialStatus());
 		}
 		else if (req.isInboundCall())
 		{
@@ -238,7 +239,7 @@ public abstract class TwilioServlet extends HttpServlet
 
 	abstract protected void onGatherCallback(TwilioRequest req);
 
-	abstract protected void onDialCallback(TwilioRequest req);
+	abstract protected void onDialCallback(TwilioRequest req, DialStatus status);
 
 	abstract protected void onTranscribeCallback(TwilioRequest req);
 
