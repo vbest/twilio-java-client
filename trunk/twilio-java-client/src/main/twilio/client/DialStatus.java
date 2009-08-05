@@ -7,11 +7,25 @@ public enum DialStatus
 	
 	public static DialStatus getDialStatus(String dialStatusText)
 	{
-		DialStatus ds = DialStatus.valueOf(dialStatusText);
+		DialStatus ds = DialStatus.UNKNOWN;
 		
-		if (ds == null)
+		if (dialStatusText != null)
 		{
-			ds = DialStatus.UNKNOWN;
+			try
+			{
+				ds = DialStatus.valueOf(dialStatusText.toUpperCase());
+			}
+			catch (Exception ex)
+			{
+				ds = DialStatus.UNKNOWN;
+			}
+			finally
+			{
+				if (ds == null)
+				{
+					ds = DialStatus.UNKNOWN;
+				}
+			}
 		}
 		
 		return ds;
