@@ -571,7 +571,12 @@ public class TwilioClient
 	 */
 	public Recordings getRecordings()
 	{
-		return getRecordings(null);
+		return getRecordings( (String) null);
+	}
+	
+	public Recordings getRecordings(Call c)
+	{
+		return getRecordings(c.getSid());
 	}
 	
 	/**
