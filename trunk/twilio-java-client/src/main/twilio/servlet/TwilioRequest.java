@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 import twilio.client.CallStatus;
 import twilio.client.DialStatus;
+import twilio.client.RecordingFormat;
 import twilio.markup.TranscriptionStatus;
 
 public class TwilioRequest extends HttpServletRequestWrapper
@@ -109,6 +110,18 @@ public class TwilioRequest extends HttpServletRequestWrapper
 	public String getRecordingUrl()
 	{
 		return this.getParameter("RecordingUrl");
+	}
+	
+	public String getRecordingUrl(RecordingFormat fmt)
+	{
+		if (this.getRecordingUrl() == null)
+		{
+			return null;
+		}
+		else
+		{
+			return this.getRecordingUrl() + fmt.getFileExtension();
+		}
 	}
 	
 	public String getDuration()
