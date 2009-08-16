@@ -11,6 +11,7 @@ public class Recording implements java.io.Serializable
 	private Integer duration;
 	private Date dateCreated;
 	private Date dateUpdated;
+	private String mp3Url;
 	
 	public String getSid()
 	{
@@ -70,6 +71,17 @@ public class Recording implements java.io.Serializable
 	public void setDateUpdated(Date dateUpdated)
 	{
 		this.dateUpdated = dateUpdated;
+	}
+
+	
+	public String getMp3Url()
+	{
+		return mp3Url;
+	}
+
+	public void setMp3Url(String url)
+	{
+		this.mp3Url = url;
 	}
 
 	public String toString()
