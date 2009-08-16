@@ -19,22 +19,29 @@ public enum CallStatus
 	}
 	
 
-	static public CallStatus getCallStatus(int code)
+	static public CallStatus getCallStatus(Integer code)
 	{
 		CallStatus result = null;
 		
-		for (CallStatus cs : CallStatus.values())
-		{
-			if (cs.getCode() == code)
-			{
-				result = cs;
-				break;
-			}
-		}
-		
-		if (result == null)
+		if (code == null)
 		{
 			result = CallStatus.UNKNOWN;
+		}
+		else
+		{
+			for (CallStatus cs : CallStatus.values())
+			{
+				if (cs.getCode() == code)
+				{
+					result = cs;
+					break;
+				}
+			}
+			
+			if (result == null)
+			{
+				result = CallStatus.UNKNOWN;
+			}
 		}
 		
 		return result;
