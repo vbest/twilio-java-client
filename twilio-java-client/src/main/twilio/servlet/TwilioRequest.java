@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import twilio.client.CallStatus;
 import twilio.client.DialStatus;
 import twilio.client.RecordingFormat;
-import twilio.markup.TranscriptionStatus;
+import twilio.client.TranscriptionStatus;
 
 public class TwilioRequest extends HttpServletRequestWrapper
 {
