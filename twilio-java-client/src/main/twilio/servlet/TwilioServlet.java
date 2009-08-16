@@ -122,6 +122,11 @@ public abstract class TwilioServlet extends HttpServlet
 		return gather(100, Constants.DEFAULT_TIMEOUT);
 	}
 	
+	protected Response gather(int numberOfDigits)
+	{
+		return gather(numberOfDigits, Constants.DEFAULT_TIMEOUT);
+	}
+	
 	protected Response gather(int numberOfDigits, int timeoutInSeconds)
 	{
 		Gather g = new Gather();
