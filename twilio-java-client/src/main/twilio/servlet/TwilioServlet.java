@@ -221,7 +221,11 @@ public abstract class TwilioServlet extends HttpServlet
 	{
 		log.info("doTwilioRequest called\n\n" + ServletUtil.toString(req));
 		
-		if (req.isDialCallback())
+		if (req.isRecordCallback())
+		{
+			onRecordCallback(req);
+		}
+		else if (req.isDialCallback())
 		{
 			onDialCallback(req, req.getDialStatus());
 		}
@@ -232,10 +236,6 @@ public abstract class TwilioServlet extends HttpServlet
 		else if (req.isGatherCallback())
 		{
 			onGatherCallback(req);
-		}
-		else if (req.isRecordCallback())
-		{
-			onRecordCallback(req);
 		}
 		else if (req.isTranscribeCallback())
 		{
