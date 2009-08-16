@@ -15,6 +15,8 @@ public class GetRecordingTest extends AbstractTwilioTest
 		
 		for (Recording r : recordings)
 		{
+			assertNotNull(r.getMp3Url());
+			
 			byte[] mp3 = c.getRecordingBytes(r, RecordingFormat.MP3);
 			
 			assertNotNull(mp3);
