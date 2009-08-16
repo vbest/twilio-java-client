@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import twilio.client.DialStatus;
-import twilio.client.RecordingFormat;
 import twilio.markup.Constants;
 import twilio.markup.Dial;
 import twilio.markup.Gather;
@@ -24,6 +23,7 @@ import twilio.markup.Record;
 import twilio.markup.Redirect;
 import twilio.markup.Response;
 import twilio.markup.Say;
+import twilio.markup.TranscriptionStatus;
 import twilio.markup.Verb;
 import twilio.markup.Voice;
 
@@ -226,6 +226,12 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			onRecordCallback(req, req.getRecordingUrl());
 		}
+		else if (req.isTranscribeCallback())
+		{
+			onTranscribeCallback(req, 
+						req.getTranscriptionStatus(), 
+						req.getTranscriptionText());
+		}
 		else if (req.isDialCallback())
 		{
 			onDialCallback(req, req.getDialStatus());
@@ -237,10 +243,6 @@ public abstract class TwilioServlet extends HttpServlet
 		else if (req.isGatherCallback())
 		{
 			onGatherCallback(req);
-		}
-		else if (req.isTranscribeCallback())
-		{
-			onTranscribeCallback(req);
 		}
 		else 
 		{
@@ -287,7 +289,7 @@ public abstract class TwilioServlet extends HttpServlet
 
 	abstract protected void onDialCallback(TwilioRequest req, DialStatus status);
 
-	abstract protected void onTranscribeCallback(TwilioRequest req);
+	abstract protected void onTranscribeCallback(TwilioRequest req, TranscriptionStatus status, String text);
 
 	protected void sendBinaryResponse(HttpServletResponse resp, byte[] data, String mimeType)
 	{
