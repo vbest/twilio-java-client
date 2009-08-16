@@ -449,18 +449,31 @@ public class TwilioClient
 	
 	public Calls getCalls()
 	{
-		return getCalls(null);
+		return getCalls(-1);
+	}
+	
+	public Calls getCalls(int number)
+	{
+		return getCalls(null, number);
 	}
 	
 	
-	public Calls getCalls(CallSearchCriteria criteria)
+	public Calls getCalls(CallSearchCriteria criteria, int number)
 	{
+		
+		Map<String, String> params = ( criteria == null ) ? (new HashMap<String, String>()): criteria.getParameterMap();
+		
+		if (number > 0)
+		{
+			params.put("num", "" + number);
+		}
+		
 		TwilioResponse r = sendTwilioRequest("GET", 
 								this.getTwilioEndpoint() 
 									.append("Accounts/")
 									.append(getAccountSid())
 									.append("/Calls"),
-									( criteria == null ) ? (null): criteria.getParameterMap());
+									params);
 
 		return r.getCalls();
 		
