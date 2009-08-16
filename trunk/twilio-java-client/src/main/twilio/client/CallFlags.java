@@ -9,16 +9,16 @@ public class CallFlags
 	
 	static public boolean callWasInbound(int flags)
 	{
-		return (flags | INBOUND) == 0;
+		return (flags | INBOUND) == INBOUND;
 	}
 	
 	static public boolean callWasInitiatedByApi(int flags)
 	{
-		return (flags | INITIATED_BY_API) == 0;
+		return (flags | INITIATED_BY_API) == INITIATED_BY_API;
 	}
 	
 	static public boolean callWasInitiatedByDialVerb(int flags)
 	{
-		return (flags | INITIATED_BY_DIAL_VERB) == 0;
+		return (flags | INITIATED_BY_DIAL_VERB) == INITIATED_BY_DIAL_VERB;
 	}
 }
