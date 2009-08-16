@@ -22,5 +22,6 @@ public class CallTest extends AbstractTwilioTest
 		assertNotNull(queryResult);
 		
 		assertTrue(queryResult.wasInitiatedByApi());
+		assertFalse(queryResult.wasInbound());
 	}	
 }
