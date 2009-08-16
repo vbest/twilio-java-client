@@ -70,27 +70,32 @@ public class Call implements java.io.Serializable
 	
 	public boolean isNoAnswer()
 	{
-		return CallStatus.isNoAnswer(status);
+		return getCallStatus() == CallStatus.FAILED_NO_ANSWER;
+	}
+	
+	public boolean isInProgress()
+	{
+		return getCallStatus() == CallStatus.IN_PROGRESS;
 	}
 	
 	public boolean isBusy()
 	{
-		return CallStatus.isBusy(status);
+		return getCallStatus() == CallStatus.FAILED_NO_ANSWER;
 	}
 	
 	public boolean isApplicationError()
 	{
-		return CallStatus.isApplicationError(status);
+		return getCallStatus() == CallStatus.FAILED_APPLICATION_ERROR;
 	}
 	
 	public boolean isNotYetDialed()
 	{
-		return CallStatus.isNotYetDialed(status);
+		return getCallStatus() == CallStatus.NOT_YET_DIALED;
 	}
 	
 	public boolean isComplete()
 	{
-		return CallStatus.isComplete(status);
+		return getCallStatus() == CallStatus.COMPLETE;
 	}
 	
 	public void setStatus(Integer s)
@@ -205,5 +210,10 @@ public class Call implements java.io.Serializable
 	{
 		// return ToStringBuilder.build(this);
 		return "";
+	}
+	
+	public CallStatus getCallStatus()
+	{
+		return CallStatus.getCallStatus(this.getStatus());
 	}
 }
