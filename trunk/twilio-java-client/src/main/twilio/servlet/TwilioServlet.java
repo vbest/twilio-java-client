@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import twilio.client.DialStatus;
+import twilio.client.RecordingFormat;
 import twilio.markup.Constants;
 import twilio.markup.Dial;
 import twilio.markup.Gather;
@@ -223,7 +224,12 @@ public abstract class TwilioServlet extends HttpServlet
 		
 		if (req.isRecordCallback())
 		{
-			onRecordCallback(req);
+			String recordingUrl = req.getRecordingUrl();
+			if ( !recordingUrl.endsWith(RecordingFormat.MP3.getFileExtension()) )
+			{
+				recordingUrl += RecordingFormat.MP3.getFileExtension();
+			}
+			onRecordCallback(req, recordingUrl);
 		}
 		else if (req.isDialCallback())
 		{
@@ -278,7 +284,7 @@ public abstract class TwilioServlet extends HttpServlet
 		
 	}
 
-	abstract protected void onRecordCallback(TwilioRequest req);
+	abstract protected void onRecordCallback(TwilioRequest req, String recordingUrl);
 
 	abstract protected void onInboundCall(TwilioRequest req);
 
