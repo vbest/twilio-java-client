@@ -18,6 +18,7 @@ import twilio.markup.Dial;
 import twilio.markup.Hangup;
 import twilio.markup.Pause;
 import twilio.markup.Play;
+import twilio.markup.Record;
 import twilio.markup.Redirect;
 import twilio.markup.Response;
 import twilio.markup.Say;
@@ -42,6 +43,7 @@ public abstract class TwilioServlet extends HttpServlet
 	      Logger.getLogger(TwilioServlet.class.getName());
 	
 	static private final long serialVersionUID = 1L;
+	static private ThreadLocal<HttpServletRequest> httpRequestTL = new ThreadLocal<HttpServletRequest>();
 	static private ThreadLocal<HttpServletResponse> httpResponseTL = new ThreadLocal<HttpServletResponse>();
 	static private ThreadLocal<Response> twilioResponseTL = new ThreadLocal<Response>();
 	
@@ -52,10 +54,12 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			setTwilioResponse(new Response());
 			httpResponseTL.set(resp);
+			httpRequestTL.set(req);
 			doTwilioRequest(new TwilioRequest(req, getTwilioAccountPhoneNumber()));
 		}
 		finally
 		{
+			httpRequestTL.remove();
 			httpResponseTL.remove();
 		}
 	}
@@ -109,6 +113,31 @@ public abstract class TwilioServlet extends HttpServlet
 		s.setVoice(v);
 		s.setLoop(loop);
 		return add(s);
+	}
+	
+	protected Response record()
+	{
+		return record(Constants.DEFAULT_TIMEOUT, Constants.DEFAULT_FINISH_ON_KEY);
+	}
+	
+	protected Response record(Integer timeout, Character finishOnKey)
+	{
+		String callbackUrl = getHttpServletRequest().getRequestURL().toString();
+		
+		return record(callbackUrl, timeout, finishOnKey);
+	}
+	
+	protected Response record(String callbackUrl, Integer timeout, Character finishOnKey)
+	{
+		Record r = new Record();
+		r.setAction(callbackUrl);
+		if (timeout != null)
+		{
+			r.setTimeout(timeout);
+		}
+		r.setFinishOnKey(finishOnKey);
+		
+		return add(r);
 	}
 	
 	protected Response hangup()
@@ -359,5 +388,10 @@ public abstract class TwilioServlet extends HttpServlet
 	protected void sendMp3Response(HttpServletResponse resp, byte[] mp3)
 	{
 		sendBinaryResponse(resp, mp3, "audio/mpeg");
+	}
+	
+	static HttpServletRequest getHttpServletRequest()
+	{
+		return httpRequestTL.get();
 	}
 }
