@@ -144,9 +144,14 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		return this.getParameter("TranscriptionText");
 	}
 	
+	public String getTranscriptionStatusParameter()
+	{
+		return this.getParameter("TranscriptionStatus");	
+	}
+	
 	public TranscriptionStatus getTranscriptionStatus()
 	{
-		String ts = this.getParameter("TranscriptionStatus");
+		String ts = getTranscriptionStatusParameter(); 
 		
 		return TranscriptionStatus.getTranscriptionStatus(ts);
 	}
@@ -181,7 +186,7 @@ public class TwilioRequest extends HttpServletRequestWrapper
 
 	public boolean isTranscribeCallback()
 	{
-		return (getTranscriptionStatus() != null);
+		return (getTranscriptionStatusParameter() != null);
 	}
 	
 	public boolean isGet()
