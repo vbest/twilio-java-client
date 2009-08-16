@@ -224,12 +224,7 @@ public abstract class TwilioServlet extends HttpServlet
 		
 		if (req.isRecordCallback())
 		{
-			String recordingUrl = req.getRecordingUrl();
-			if ( !recordingUrl.endsWith(RecordingFormat.MP3.getFileExtension()) )
-			{
-				recordingUrl += RecordingFormat.MP3.getFileExtension();
-			}
-			onRecordCallback(req, recordingUrl);
+			onRecordCallback(req, req.getRecordingUrl());
 		}
 		else if (req.isDialCallback())
 		{
