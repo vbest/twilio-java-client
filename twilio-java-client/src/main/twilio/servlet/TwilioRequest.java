@@ -56,11 +56,7 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		}
 		else
 		{
-			CallStatus status = new CallStatus();
-			
-			
-			
-			return status;
+			return CallStatus.UNKNOWN; // todo : fix this
 		}
 		
 	}
