@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import twilio.client.DialStatus;
 import twilio.markup.Constants;
 import twilio.markup.Dial;
+import twilio.markup.Gather;
 import twilio.markup.Hangup;
 import twilio.markup.Pause;
 import twilio.markup.Play;
@@ -113,6 +114,21 @@ public abstract class TwilioServlet extends HttpServlet
 		s.setVoice(v);
 		s.setLoop(loop);
 		return add(s);
+	}
+	
+	protected Response gather()
+	{
+		return gather(100, Constants.DEFAULT_TIMEOUT);
+	}
+	
+	protected Response gather(int numberOfDigits, int timeoutInSeconds)
+	{
+		Gather g = new Gather();
+		g.setNumDigits(numberOfDigits);
+		g.setTimeout(timeoutInSeconds);
+		g.setAction(getHttpServletRequest().getRequestURL().toString());
+		
+		return add(g);
 	}
 	
 	protected Response record()
