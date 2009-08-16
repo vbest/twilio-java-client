@@ -16,5 +16,11 @@ public class CallTest extends AbstractTwilioTest
 		assertNotNull(call);
 		
 		System.out.println(call);
+		
+		Call queryResult = c.getCall(call.getSid());
+		
+		assertNotNull(queryResult);
+		
+		assertTrue(queryResult.wasInitiatedByApi());
 	}	
 }
