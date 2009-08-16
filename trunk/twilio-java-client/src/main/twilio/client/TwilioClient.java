@@ -25,6 +25,8 @@ import java.util.*;
 
 public class TwilioClient
 {
+	public static final String TWILIO_ENDPOINT_BASE = "https://api.twilio.com/2008-08-01/";
+
 	private HttpClient httpClient;
 	
 	private boolean compressionEnabled = false;
@@ -106,6 +108,16 @@ public class TwilioClient
 		if (r.getTwilioException() != null)
 		{
 			throw r.getTwilioException();
+		}
+		
+		if (r.getRecordings() != null)
+		{
+			setMp3Url(r.getRecordings());
+		}
+		
+		if (r.getRecording() != null)
+		{
+			setMp3Url(r.getRecording());
 		}
 		
 		return r;
@@ -390,7 +402,7 @@ public class TwilioClient
 	{
 		
 		StringBuilder endpoint = new StringBuilder();
-		endpoint.append("https://api.twilio.com/2008-08-01/");  
+		endpoint.append(TWILIO_ENDPOINT_BASE);  
 
 		return endpoint;
 	}
@@ -601,10 +613,30 @@ public class TwilioClient
 									.append("/Recordings"),
 								params);
 
-		return r.getRecordings();
+		Recordings recordings = r.getRecordings();
+		
+		return recordings;
 		
 	}
 
+	protected void setMp3Url(Recordings recordings)
+	{
+		for (Recording r : recordings)
+		{
+			setMp3Url(r);
+		}
+	}
+	
+	protected void setMp3Url(Recording r)
+	{
+		r.setMp3Url(TWILIO_ENDPOINT_BASE 
+				+ "Account/" 
+				+ getAccountSid()
+				+ "/Recordings/"
+				+ r.getSid()
+				+ RecordingFormat.MP3.getFileExtension());
+	}
+	
 	public byte[] getRecordingBytes(String recordingSid)
 	{
 		return getRecordingBytes(recordingSid, RecordingFormat.DEFAULT);
