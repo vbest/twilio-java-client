@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import twilio.client.DialStatus;
+import twilio.client.TranscriptionStatus;
 import twilio.markup.Constants;
 import twilio.markup.Dial;
 import twilio.markup.Gather;
@@ -23,7 +24,6 @@ import twilio.markup.Record;
 import twilio.markup.Redirect;
 import twilio.markup.Response;
 import twilio.markup.Say;
-import twilio.markup.TranscriptionStatus;
 import twilio.markup.Verb;
 import twilio.markup.Voice;
 
