@@ -134,25 +134,46 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected Response record()
 	{
-		return record(Constants.DEFAULT_TIMEOUT, Constants.DEFAULT_FINISH_ON_KEY);
+		return record(false);
+	}
+	
+	protected Response record(boolean transcription)
+	{
+		String recordCallbackUrl = getHttpServletRequest().getRequestURL().toString();
+		
+		String transcriptionCallbackUrl = null;
+		
+		if (transcription)
+		{
+			transcriptionCallbackUrl = getHttpServletRequest().getRequestURL().toString();
+		}
+		
+		return record(recordCallbackUrl, 
+					Constants.DEFAULT_TIMEOUT, 
+					Constants.DEFAULT_FINISH_ON_KEY, 
+					transcriptionCallbackUrl);
 	}
 	
 	protected Response record(Integer timeout, Character finishOnKey)
 	{
 		String callbackUrl = getHttpServletRequest().getRequestURL().toString();
 		
-		return record(callbackUrl, timeout, finishOnKey);
+		return record(callbackUrl, timeout, finishOnKey, null);
 	}
 	
-	protected Response record(String callbackUrl, Integer timeout, Character finishOnKey)
+	protected Response record(String recordCallbackUrl, 
+					Integer timeout, 
+					Character finishOnKey,
+					String transcribeCallbackUrl)
 	{
 		Record r = new Record();
-		r.setAction(callbackUrl);
+		r.setAction(recordCallbackUrl);
 		if (timeout != null)
 		{
 			r.setTimeout(timeout);
 		}
 		r.setFinishOnKey(finishOnKey);
+		r.setTranscribeCallback(transcribeCallbackUrl);
 		
 		return add(r);
 	}
