@@ -25,5 +25,17 @@ public class GetCallsTest extends AbstractTwilioTest
 		
 	}
 	
+	public void testGetCalls2() throws Exception
+	{
+		final int number = 2;
+		
+		TwilioClient c = getClient();
+	
+		Calls calls = c.getCalls(number); 
+		
+		assertNotNull(calls);
+		
+		assertTrue(number == calls.size());
+	}
 	
 }
