@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
@@ -119,20 +120,37 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected Response gather()
 	{
-		return gather(100, Constants.DEFAULT_TIMEOUT);
+		return gather(1, Constants.DEFAULT_TIMEOUT, null);
 	}
 	
 	protected Response gather(int numberOfDigits)
 	{
-		return gather(numberOfDigits, Constants.DEFAULT_TIMEOUT);
+		return gather(numberOfDigits, Constants.DEFAULT_TIMEOUT, null);
 	}
 	
 	protected Response gather(int numberOfDigits, int timeoutInSeconds)
 	{
+		return gather(numberOfDigits, timeoutInSeconds, null);
+	}
+	
+	protected Response gather(int numberOfDigits, int timeoutInSeconds, String queryStringForActionUrl)
+	{
 		Gather g = new Gather();
 		g.setNumDigits(numberOfDigits);
 		g.setTimeout(timeoutInSeconds);
-		g.setAction(getHttpServletRequest().getRequestURL().toString());
+		
+		StringBuffer action = getRequestURL();
+		
+		if (queryStringForActionUrl != null)
+		{
+			if ( ! queryStringForActionUrl.startsWith("?"))
+			{
+				action.append("?");
+			}
+			action.append(queryStringForActionUrl);
+		}
+		
+		g.setAction(action.toString());
 		
 		return add(g);
 	}
@@ -450,4 +468,15 @@ public abstract class TwilioServlet extends HttpServlet
 		return getHttpServletRequest().getQueryString();
 	}
 
+	protected String urlEncode(String s)
+	{
+		try
+		{
+			return URLEncoder.encode(s, "UTF-8");
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
 }
