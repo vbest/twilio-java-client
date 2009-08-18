@@ -268,7 +268,7 @@ public abstract class TwilioServlet extends HttpServlet
 		}
 		else if (req.isInboundCall())
 		{
-			onInboundCall(req);
+			onInboundCall(req, req.getCaller(), req.getCalled());
 		}
 		else 
 		{
@@ -309,7 +309,7 @@ public abstract class TwilioServlet extends HttpServlet
 
 	abstract protected void onRecordCallback(TwilioRequest req, String recordingUrl);
 
-	abstract protected void onInboundCall(TwilioRequest req);
+	abstract protected void onInboundCall(TwilioRequest req, String caller, String called);
 
 	abstract protected void onGatherCallback(TwilioRequest req, String digits);
 
@@ -435,8 +435,19 @@ public abstract class TwilioServlet extends HttpServlet
 		sendBinaryResponse(resp, mp3, "audio/mpeg");
 	}
 	
-	static HttpServletRequest getHttpServletRequest()
+	protected static HttpServletRequest getHttpServletRequest()
 	{
 		return httpRequestTL.get();
 	}
+	
+	protected static StringBuffer getRequestURL()
+	{
+		return getHttpServletRequest().getRequestURL();
+	}
+
+	protected static String getQueryString()
+	{
+		return getHttpServletRequest().getQueryString();
+	}
+
 }
