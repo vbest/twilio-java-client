@@ -258,6 +258,10 @@ public abstract class TwilioServlet extends HttpServlet
 						req.getTranscriptionStatus(), 
 						req.getTranscriptionText());
 		}
+		else if (req.isGatherCallback())
+		{
+			onGatherCallback(req, req.getDigits());
+		}
 		else if (req.isDialCallback())
 		{
 			onDialCallback(req, req.getDialStatus());
@@ -265,10 +269,6 @@ public abstract class TwilioServlet extends HttpServlet
 		else if (req.isInboundCall())
 		{
 			onInboundCall(req);
-		}
-		else if (req.isGatherCallback())
-		{
-			onGatherCallback(req);
 		}
 		else 
 		{
@@ -311,7 +311,7 @@ public abstract class TwilioServlet extends HttpServlet
 
 	abstract protected void onInboundCall(TwilioRequest req);
 
-	abstract protected void onGatherCallback(TwilioRequest req);
+	abstract protected void onGatherCallback(TwilioRequest req, String digits);
 
 	abstract protected void onDialCallback(TwilioRequest req, DialStatus status);
 
