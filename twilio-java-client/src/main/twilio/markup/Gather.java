@@ -36,7 +36,7 @@ public class Gather extends Verb
 	
 	public void add(Say s)
 	{
-		this.add(s);
+		this.nestedVerbs.add(s);
 	}
 	
 	public void say(String sayMessage)
