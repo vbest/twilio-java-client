@@ -19,6 +19,11 @@ public class Play extends Verb
 		super();
 	}
 	
+	public Play(CharSequence url)
+	{
+		this.setUrl(url);
+	}
+	
 	public void setUrl(CharSequence url)
 	{
 		this.url = url.toString();

@@ -39,6 +39,15 @@ public class MarkupTest extends TestCase
 		
 		rsp.add(new Pause(5));
 		
+		Gather gather = new Gather();
+		gather.say("Press 1 for something cool.");
+		gather.setAction("http://www.twilioapp.com/foo/gather");
+		gather.setNumDigits(1);
+		gather.setTimeout(15);
+		
+		rsp.add(gather);
+		
+		rsp.add(new Say("Good bye"));
 		rsp.add(new Hangup());
 		
 		rsp.add(new Redirect("http://www.twilioapp.com/foo/bar"));

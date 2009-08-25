@@ -1,12 +1,19 @@
 
 package twilio.markup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 @XStreamAlias("Gather")
 public class Gather extends Verb
 {
+	@XStreamImplicit
+	private List<Verb> nestedVerbs = new ArrayList<Verb>();
+	
 	@XStreamAlias("action")
 	@XStreamAsAttribute
 	private String action;
@@ -26,6 +33,26 @@ public class Gather extends Verb
 	@XStreamAlias("numDigits")
 	@XStreamAsAttribute
 	private int numDigits = 5000;
+	
+	public void add(Say s)
+	{
+		this.add(s);
+	}
+	
+	public void say(String sayMessage)
+	{
+		this.add(new Say(sayMessage));
+	}
+	
+	public void play(String url)
+	{
+		this.add(new Play(url));
+	}
+	
+	public void add(Play p)
+	{
+		this.nestedVerbs.add(p);
+	}
 	
 	public String getAction()
 	{
