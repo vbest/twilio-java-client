@@ -268,6 +268,7 @@ public abstract class TwilioServlet extends HttpServlet
 		
 		if (! verifyRequest(req))
 		{
+			log.info("verification failed");
 			setTwilioResponse(null);
 			getHttpServletResponse().setContentType("text/plain");
 			getHttpServletResponse().setStatus(HttpServletResponse.SC_FORBIDDEN);
