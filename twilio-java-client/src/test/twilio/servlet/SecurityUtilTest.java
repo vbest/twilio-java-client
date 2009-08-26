@@ -21,11 +21,13 @@ public class SecurityUtilTest extends TestCase
 		
 		req.addHeader("X-Twilio-Signature", "xxx");
 		
-		boolean result = SecurityUtil.verifyRequest(req, "foo");
+		TwilioRequest trequest = new TwilioRequest(req, "503-555-5555");
+		
+		boolean result = SecurityUtil.verifyRequest(trequest, "foo");
 		
 		// todo : assertTrue(result);
 		
-		result = SecurityUtil.verifyRequest(new MockHttpServletRequest(), "bogus-auth-token");
+		// result = SecurityUtil.verifyRequest(new MockHttpServletRequest(), "bogus-auth-token");
 		
 		// todo : assertFalse(result);
 		
