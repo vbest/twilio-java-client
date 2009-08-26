@@ -10,8 +10,11 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
 
+import java.util.logging.*;
+
 public class SecurityUtil
 {
+	private static final Logger log = Logger.getLogger(SecurityUtil.class.getName());
 	private static final String CHARSET = "UTF-8";
 	private static final String ALGORITHM = "HmacSHA1";
 
@@ -44,6 +47,10 @@ public class SecurityUtil
 	
 	static public boolean verifyRequest(CharSequence data, String twilioSignature, String twilioAuthToken)
 	{
+		log.info("verifyRequest data: " + data);
+		log.info("verifyRequest twilioSignature: " + twilioSignature);
+		log.info("verifyRequest twilioAuthToken: " + twilioAuthToken);
+		
 		return Arrays.equals(getBytes(twilioSignature), calculateSignature(data, twilioAuthToken));
 	}
 	
