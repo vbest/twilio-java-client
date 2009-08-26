@@ -131,7 +131,7 @@ public class TwilioRequest extends HttpServletRequestWrapper
 	
 	public String getTwilioSignature()
 	{
-		return this.getParameter("X-Twilio-Signature");
+		return this.getHeader("X-Twilio-Signature");
 	}
 
 	public DialStatus getDialStatus()
