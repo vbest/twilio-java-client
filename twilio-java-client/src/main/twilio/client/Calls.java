@@ -22,7 +22,7 @@ public class Calls extends TwilioList<Call>
 	
 	public Collection<String> getCalledNumbers()
 	{
-		Set<String> called = new HashSet<String>();
+		Set<String> called = new LinkedHashSet<String>();
 		
 		for (Call c : this)
 		{
