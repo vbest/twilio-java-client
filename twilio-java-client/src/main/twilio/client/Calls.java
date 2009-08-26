@@ -3,13 +3,14 @@ package twilio.client;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Calls extends TwilioList<Call>
 {
 	public Collection<String> getCallers()
 	{
-		Set<String> callers = new HashSet<String>();
+		Set<String> callers = new LinkedHashSet<String>();
 		
 		for (Call c : this)
 		{
