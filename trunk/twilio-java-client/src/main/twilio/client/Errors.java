@@ -9,4 +9,9 @@ package twilio.client;
 public class Errors
 {
 	// todo : implement this
+	
+	public String getErrorText(Integer errorCode)
+	{
+		return "todo";
+	}
 }
