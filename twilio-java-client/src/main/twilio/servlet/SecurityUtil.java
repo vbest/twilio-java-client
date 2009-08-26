@@ -47,9 +47,9 @@ public class SecurityUtil
 	
 	static public boolean verifyRequest(CharSequence data, String twilioSignature, String twilioAuthToken)
 	{
-		log.info("verifyRequest data: " + data);
-		log.info("verifyRequest twilioSignature: " + twilioSignature);
-		log.info("verifyRequest twilioAuthToken: " + twilioAuthToken);
+		log.fine("verifyRequest data: " + data);
+		log.fine("verifyRequest twilioSignature: " + twilioSignature);
+		log.fine("verifyRequest twilioAuthToken: " + twilioAuthToken);
 		
 		return Arrays.equals(getBytes(twilioSignature), calculateSignature(data, twilioAuthToken));
 	}
@@ -64,9 +64,6 @@ public class SecurityUtil
 			mac.init(key);
 			
 			byte[] base64 = Base64.encodeBase64(mac.doFinal(getBytes(data)));
-			
-			String base64String = new String(base64);
-			log.info("base64String: " + base64String);
 			
 			return base64;
 		}
