@@ -266,7 +266,13 @@ public abstract class TwilioServlet extends HttpServlet
 	{
 		log.info("doTwilioRequest called\n\n" + ServletUtil.toString(req));
 		
-		if (req.isRecordCallback())
+		if (! verifyRequest(req))
+		{
+			setTwilioResponse(null);
+			getHttpServletResponse().setContentType("text/plain");
+			getHttpServletResponse().setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+		else if (req.isRecordCallback())
 		{
 			onRecordCallback(req, req.getRecordingUrl());
 		}
@@ -292,7 +298,6 @@ public abstract class TwilioServlet extends HttpServlet
 		{
 			setTwilioResponse(null);
 			onUnknownRequest(req);
-			
 		}
 		
 		if (getTwilioResponse() != null)
@@ -300,6 +305,13 @@ public abstract class TwilioServlet extends HttpServlet
 			writeTwilioResponse(getTwilioResponse());
 		}
 	}
+
+	protected boolean verifyRequest(TwilioRequest req)
+	{
+		return SecurityUtil.verifyRequest(req, getTwilioAuthToken());
+	}
+
+	abstract protected String getTwilioAuthToken();
 
 	protected void onUnknownRequest(TwilioRequest req) throws IOException
 	{
