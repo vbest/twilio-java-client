@@ -54,6 +54,17 @@ public class Gather extends Verb
 		this.nestedVerbs.add(p);
 	}
 	
+	public void add(Pause p)
+	{
+		this.nestedVerbs.add(p);
+	}
+	
+	public void pause(int duration)
+	{
+		Pause p = new Pause(duration);
+		add(p);
+	}
+	
 	public String getAction()
 	{
 		return action;
