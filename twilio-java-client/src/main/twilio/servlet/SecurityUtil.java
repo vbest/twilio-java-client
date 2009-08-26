@@ -80,10 +80,9 @@ public class SecurityUtil
 	{
 		StringBuffer data = req.getRequestURL();
 		
-		data.append(req.getRequestURL());
-		data.append("?");
 		if (req.getQueryString() != null)
 		{
+			data.append("?");
 			data.append(req.getQueryString());
 		}
 		
