@@ -693,4 +693,18 @@ public class TwilioClient
 	{
 		deleteRecording(r.getSid());
 	}
+	
+	public void redirectCall(String callSid, String twimlUrl)
+	{
+		StringBuilder url = this.getTwilioEndpoint() 
+							.append("Accounts/")
+							.append(getAccountSid())
+							.append("/Calls/")
+							.append(callSid);
+		
+		url.append("?CurrentUrl=");
+		url.append(encodeParameter(twimlUrl));
+
+		sendTwilioRequest("POST", url);
+	}
 }
