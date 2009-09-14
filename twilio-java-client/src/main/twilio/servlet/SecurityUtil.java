@@ -109,7 +109,9 @@ public class SecurityUtil
 	private static Set<String> getPostParameterNames(HttpServletRequest req)
 	{
 		@SuppressWarnings("unchecked")
-		Set<String> result = (Set<String>) req.getParameterMap().keySet();
+		Set<String> parameterKeys = (Set<String>) req.getParameterMap().keySet();
+		
+		Set<String> result = new HashSet<String>(parameterKeys);
 		
 		result.retainAll(getQueryStringParameterNames(req));
 		
