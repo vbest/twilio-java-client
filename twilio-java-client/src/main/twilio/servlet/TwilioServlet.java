@@ -120,22 +120,40 @@ public abstract class TwilioServlet extends HttpServlet
 	
 	protected Response gather()
 	{
-		return gather(1, Constants.DEFAULT_TIMEOUT, null);
+		return gather(null, 1, Constants.DEFAULT_TIMEOUT, null);
 	}
 	
 	protected Response gather(int numberOfDigits)
 	{
-		return gather(numberOfDigits, Constants.DEFAULT_TIMEOUT, null);
+		return gather(null, numberOfDigits, Constants.DEFAULT_TIMEOUT, null);
 	}
 	
 	protected Response gather(int numberOfDigits, int timeoutInSeconds)
 	{
-		return gather(numberOfDigits, timeoutInSeconds, null);
+		return gather(null, numberOfDigits, timeoutInSeconds, null);
+	}
+
+	protected Response gather(int numberOfDigits, int timeoutInSeconds, String... sayMessages)
+	{
+		return gather(sayMessages, numberOfDigits, timeoutInSeconds, null);
 	}
 	
-	protected Response gather(int numberOfDigits, int timeoutInSeconds, String queryStringForActionUrl)
+	protected Response gather(String[] sayMessages, int numberOfDigits, int timeoutInSeconds, String queryStringForActionUrl)
 	{
 		Gather g = new Gather();
+		
+		if (sayMessages != null)
+		{
+			for (String msg : sayMessages)
+			{
+				if ( (msg != null) && (msg.length() > 0) )
+				{
+					Say s = new Say(msg);
+					g.add(s);
+				}
+			}
+		}
+		
 		g.setNumDigits(numberOfDigits);
 		g.setTimeout(timeoutInSeconds);
 		
