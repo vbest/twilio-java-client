@@ -253,6 +253,11 @@ public abstract class TwilioServlet extends HttpServlet
 		return add(r);
 	}
 	
+	protected Response redirect()
+	{
+		return redirect(getHttpServletRequest().getRequestURL());
+	}
+	
 	protected Response dial(CharSequence... numbers)
 	{
 		Dial d = new Dial();
