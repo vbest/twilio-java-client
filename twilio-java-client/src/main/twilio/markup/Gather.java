@@ -11,6 +11,8 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamAlias("Gather")
 public class Gather extends Verb
 {
+	public static final Character ACCEPT_ALL = '!';
+	
 	@XStreamImplicit
 	private List<Verb> nestedVerbs = new ArrayList<Verb>();
 	
@@ -28,7 +30,7 @@ public class Gather extends Verb
 	
 	@XStreamAlias("finishOnKey")
 	@XStreamAsAttribute
-	private Character finishOnKey = Constants.DEFAULT_FINISH_ON_KEY;
+	private String finishOnKey = Constants.DEFAULT_FINISH_ON_KEY.toString();
 	
 	@XStreamAlias("numDigits")
 	@XStreamAsAttribute
@@ -71,9 +73,16 @@ public class Gather extends Verb
 	}
 
 
-	public void setAction(String action)
+	public void setAction(CharSequence action)
 	{
-		this.action = action;
+		if (action == null)
+		{
+			this.action = null;
+		}
+		else
+		{
+			this.action = action.toString();
+		}
 	}
 
 
@@ -112,15 +121,26 @@ public class Gather extends Verb
 	}
 
 
-	public Character getFinishOnKey()
+	public String getFinishOnKey()
 	{
-		return finishOnKey;
+		return this.finishOnKey;
 	}
 
 
-	public void setFinishOnKey(Character finishOnKey)
+	public void setFinishOnKey(Character c)
 	{
-		this.finishOnKey = finishOnKey;
+		if (c == null)
+		{
+			this.finishOnKey = null;
+		}
+		else if (c == ACCEPT_ALL)
+		{
+			this.finishOnKey = "";
+		}
+		else
+		{
+			this.finishOnKey = c.toString();
+		}
 	}
 
 
