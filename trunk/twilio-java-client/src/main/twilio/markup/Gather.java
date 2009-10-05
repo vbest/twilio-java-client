@@ -11,8 +11,6 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamAlias("Gather")
 public class Gather extends Verb
 {
-	public static final Character ACCEPT_ALL = '!';
-	
 	@XStreamImplicit
 	private List<Verb> nestedVerbs = new ArrayList<Verb>();
 	
@@ -130,10 +128,6 @@ public class Gather extends Verb
 	public void setFinishOnKey(Character c)
 	{
 		if (c == null)
-		{
-			this.finishOnKey = null;
-		}
-		else if (c == ACCEPT_ALL)
 		{
 			this.finishOnKey = "";
 		}
