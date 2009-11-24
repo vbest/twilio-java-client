@@ -12,10 +12,17 @@ public class Dial extends Verb
 	
 	@XStreamImplicit
 	private List<Number> numbers = new ArrayList<Number>();
+
+	private Conference conference;
 	
 	public Dial()
 	{
 		
+	}
+	
+	public Dial(Conference c)
+	{
+		this.add(c);
 	}
 	
 	public Dial(String phoneNum)
@@ -33,6 +40,11 @@ public class Dial extends Verb
 		this.add(new Number(number));
 	}
 	
+	public void add(Conference c)
+	{
+		this.conference = c;
+	}
+	
 	public void add(Number n)
 	{
 		this.numbers.add(n);
@@ -42,5 +54,7 @@ public class Dial extends Verb
 	{
 		return phoneNumber;
 	}
+
+
 	
 }
