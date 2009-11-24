@@ -459,6 +459,18 @@ public class TwilioClient
 		
 	}
 	
+	public Conferences getConferences()
+	{
+		TwilioResponse r = sendTwilioRequest("GET", 
+				this.getTwilioEndpoint() 
+					.append("Accounts/")
+					.append(getAccountSid())
+					.append("/Conferences"),
+					new HashMap());
+
+		return r.getConferences();
+	}
+	
 	public Calls getCalls()
 	{
 		return getCalls(-1);
