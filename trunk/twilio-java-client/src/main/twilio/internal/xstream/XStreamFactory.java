@@ -56,6 +56,8 @@ public class XStreamFactory
 		xstream.alias("Notifications", Notifications.class);
 		xstream.alias("OutgoingCallerId", OutgoingCallerId.class);
 		xstream.alias("OutgoingCallerIds", OutgoingCallerIds.class);
+		xstream.alias("Participant", Participant.class);
+		xstream.alias("Participants", Participants.class);
 		xstream.alias("Recording", Recording.class);
 		xstream.alias("Recordings", Recordings.class);
 		xstream.alias("TwilioException", TwilioException.class);
