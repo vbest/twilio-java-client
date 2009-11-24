@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import twilio.client.DialStatus;
 import twilio.client.TranscriptionStatus;
+import twilio.markup.Conference;
 import twilio.markup.Constants;
 import twilio.markup.Dial;
 import twilio.markup.Gather;
@@ -256,6 +257,15 @@ public abstract class TwilioServlet extends HttpServlet
 	protected Response redirect()
 	{
 		return redirect(getHttpServletRequest().getRequestURL());
+	}
+
+	protected Response dial(Conference c)
+	{
+		Dial d = new Dial();
+		
+		d.add(c);
+		
+		return add(d);
 	}
 	
 	protected Response dial(CharSequence... numbers)
