@@ -19,11 +19,11 @@ public class TwilioConverter
 	
     public TwilioConverter(Mapper m, Class clazz, String fieldName)
 	{
-    	super(new CustomMapper(m, fieldName), 
-    			new PureJavaReflectionProvider());
-    	
-    	this.targetClass = clazz;
-    	this.fieldName = fieldName;
+	    	super(new CustomMapper(m, fieldName), 
+	    			new PureJavaReflectionProvider());
+	    	
+	    	this.targetClass = clazz;
+	    	this.fieldName = fieldName;
 	}
 
 	public Object unmarshal(HierarchicalStreamReader reader,
