@@ -13,6 +13,7 @@ public class TwilioResponse implements java.io.Serializable
 	private IncomingPhoneNumber incomingPhoneNumber;
 	private ValidationRequest validationRequest;
 	private Calls calls;
+	private Conferences conferences;
 	private Call call;
 	private Recordings recordings;
 	private Recording recording;
@@ -195,6 +196,19 @@ public class TwilioResponse implements java.io.Serializable
 		this.recording = r;
 	}
 
+
+
+	public Conferences getConferences()
+	{
+		return conferences;
+	}
+
+
+
+	public void setConferences(Conferences c)
+	{
+		this.conferences = c;
+	}
 
 	
 }
