@@ -48,6 +48,8 @@ public class XStreamFactory
 		xstream.alias("Account", Account.class);
 		xstream.alias("Call", Call.class);
 		xstream.alias("Calls", Calls.class);
+		xstream.alias("Conference", Conference.class);
+		xstream.alias("Conferences", Conferences.class);
 		xstream.alias("IncomingPhoneNumber", IncomingPhoneNumber.class);
 		xstream.alias("IncomingPhoneNumbers", IncomingPhoneNumbers.class);
 		xstream.alias("Notification", Notification.class);
