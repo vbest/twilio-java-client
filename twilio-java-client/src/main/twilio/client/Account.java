@@ -12,7 +12,19 @@ public class Account implements java.io.Serializable
 	private Integer status;
 	private String statusText;
 	private String authToken;
+	private Type type;
 	
+	
+	public Type getType()
+	{
+		return type;
+	}
+
+	public void setType(Type t)
+	{
+		this.type = t;
+	}
+
 	public String getSid()
 	{
 		return sid;
@@ -99,6 +111,21 @@ public class Account implements java.io.Serializable
 		else
 		{
 			return getStatus().intValue() == 2;
+		}
+	}
+	
+	static public class Type
+	{
+		private String type;
+		
+		public Type()
+		{
+			
+		}
+		
+		public Type(String type)
+		{
+			this.type = type;
 		}
 	}
 }

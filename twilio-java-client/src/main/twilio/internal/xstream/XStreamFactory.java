@@ -46,6 +46,7 @@ public class XStreamFactory
  		// xstream.aliasField("Sid", Call.class, "sid");
  		
 		xstream.alias("Account", Account.class);
+		xstream.alias("Type", Account.Type.class);
 		xstream.alias("Call", Call.class);
 		xstream.alias("Calls", Calls.class);
 		xstream.alias("Conference", Conference.class);
