@@ -15,6 +15,16 @@ public class SMSMessage implements java.io.Serializable
 	private String body;
 	private String status;
 	private Integer flags;
+	private Price price;
+	
+	public Price getPrice()
+	{
+		return price;
+	}
+	public void setPrice(Price price)
+	{
+		this.price = price;
+	}
 	public String getSid()
 	{
 		return sid;
