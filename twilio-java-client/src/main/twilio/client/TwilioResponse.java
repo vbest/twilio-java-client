@@ -15,6 +15,7 @@ public class TwilioResponse implements java.io.Serializable
 	private Calls calls;
 	private Conferences conferences;
 	private Call call;
+	private SMSMessage sMSMessage;
 	private Recordings recordings;
 	private Recording recording;
 	
