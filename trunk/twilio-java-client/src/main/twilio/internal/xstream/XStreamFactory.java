@@ -61,6 +61,8 @@ public class XStreamFactory
 		xstream.alias("Participants", Participants.class);
 		xstream.alias("Recording", Recording.class);
 		xstream.alias("Recordings", Recordings.class);
+		xstream.alias("SMSMessage", SMSMessage.class);
+		xstream.alias("SMSMessages", SMSMessages.class);
 		xstream.alias("TwilioException", TwilioException.class);
 		xstream.alias("TwilioResponse", TwilioResponse.class);
 		xstream.alias("ValidationRequest", ValidationRequest.class);
