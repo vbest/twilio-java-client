@@ -18,7 +18,7 @@ public class TwilioMapper extends MapperWrapper
         
         if (Character.isUpperCase(firstChar))
         {
-        	fieldName = Character.toString(firstChar).toLowerCase()
+        		fieldName = Character.toString(firstChar).toLowerCase()
         					+ fieldName.substring(1);
         }
         
