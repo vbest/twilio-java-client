@@ -441,6 +441,25 @@ public class TwilioClient
 		
 	}
 
+	public SMSMessage sendSmsMessage(String from, String to, String message)
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		
+		params.put("From", from);
+		params.put("To", to);
+		params.put("Body", message);
+		
+		TwilioResponse r = sendTwilioRequest("POST", 
+								this.getTwilioEndpoint() 
+									.append("Accounts/")
+									.append(this.getAccountSid())
+									.append("/SMS/Messages"),
+								params);
+
+		return null;
+		
+	}
+	
 	public Call getCall(String callSid)
 	{
 		if ( (callSid == null) || (callSid.length() == 0) )
