@@ -19,6 +19,7 @@ import twilio.internal.xstream.XStreamFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 // todo :   implement pre-emptive authorization ???
@@ -485,7 +486,7 @@ public class TwilioClient
 					.append("Accounts/")
 					.append(getAccountSid())
 					.append("/Conferences"),
-					new HashMap());
+					new HashMap<String, String>());
 
 		return r.getConferences();
 	}
@@ -595,6 +596,44 @@ public class TwilioClient
 	}
 
 
+	public SMSMessages getSmsMessages()
+	{
+		return getSmsMessages(null, null, null);
+	}
+	
+	public SMSMessages getSmsMessages(String from, String to, Date dateSent)
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		
+		if (from != null)
+		{
+			params.put("From", from);
+		}
+		
+		if (to != null)
+		{
+			params.put("To", to);
+		}
+	
+		if (dateSent != null)
+		{
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-mm-dd");
+			String yyyymmdd = fmt.format(dateSent);
+			params.put("DateSent", yyyymmdd);
+		}
+		
+		TwilioResponse r = sendTwilioRequest("GET", 
+								this.getTwilioEndpoint() 
+									.append("Accounts/")
+									.append(getAccountSid())
+									.append("/SMS/Messages"),
+								params);
+
+		SMSMessages msgs = r.getSMSMessages();
+		
+		return msgs;
+	}
+	
 	/**
 	 * 
 	 * @return all Recordings associated with your Twilio account
@@ -604,6 +643,7 @@ public class TwilioClient
 	{
 		return getRecordings( (String) null);
 	}
+	
 	
 	public Recordings getRecordings(Call c)
 	{
