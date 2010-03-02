@@ -8,14 +8,30 @@ public class SmsMessageTest extends AbstractTwilioTest
 	{
 		TwilioClient c = getClient();
 	
-		c.sendSmsMessage( 
-						getCallFrom(), 
-						getCallTo(),
-						"Hello world");
+		String messageBody = "Hello world " + System.currentTimeMillis();
 		
-//		assertNotNull(call);
+		SMSMessage msg = c.sendSmsMessage( 
+								getCallFrom(), 
+								getCallTo(),
+								messageBody);
 		
-//		System.out.println(call);
+		assertNotNull(msg);
+		
+		System.out.println(msg);
+		
+		assertNotNull(msg.getAccountSid());
+		
+		assertEquals(messageBody, msg.getBody());
+		
+		assertNotNull(msg.getTo());
+		
+		assertNotNull(msg.getFrom());
+		
+		assertNotNull(msg.getDateCreated());
+		
+		assertNotNull(msg.getSid());
+		
+		assertNotNull(msg.getPrice());
 		
 	}	
 }
