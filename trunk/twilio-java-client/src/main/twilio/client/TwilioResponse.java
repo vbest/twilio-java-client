@@ -8,18 +8,21 @@ public class TwilioResponse implements java.io.Serializable
 	
 	private Account account;
 	private OutgoingCallerIds outgoingCallerIds;
-	private OutgoingCallerId outgoingCallerId;
+	private OutgoingCallerId  outgoingCallerId;
 	private IncomingPhoneNumbers incomingPhoneNumbers;
-	private IncomingPhoneNumber incomingPhoneNumber;
+	private IncomingPhoneNumber  incomingPhoneNumber;
 	private ValidationRequest validationRequest;
-	private Calls calls;
+	private Conference conference;
 	private Conferences conferences;
+	private Calls calls;
 	private Call call;
-	private SMSMessage sMSMessage;
+	private SMSMessage  sMSMessage;
+	private SMSMessages sMSMessages;
 	private Recordings recordings;
-	private Recording recording;
+	private Recording  recording;
 	
 	transient private String xml;
+
 
 	
 
@@ -219,5 +222,14 @@ public class TwilioResponse implements java.io.Serializable
 		this.conferences = c;
 	}
 
-	
+
+	public SMSMessages getSMSMessages()
+	{
+		return sMSMessages;
+	}
+
+	public Conference getConference()
+	{
+		return conference;
+	}
 }
