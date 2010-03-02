@@ -456,7 +456,7 @@ public class TwilioClient
 									.append("/SMS/Messages"),
 								params);
 
-		return null;
+		return r.getSMSMessage();
 		
 	}
 	

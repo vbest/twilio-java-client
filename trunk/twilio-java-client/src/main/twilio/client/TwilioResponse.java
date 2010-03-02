@@ -30,7 +30,15 @@ public class TwilioResponse implements java.io.Serializable
 	}
 
 
-
+	public SMSMessage getSMSMessage()
+	{
+		return sMSMessage;
+	}
+	
+	public void setSMSMessage(SMSMessage msg)
+	{
+		this.sMSMessage = msg;
+	}
 	public void setXml(String xmlResponse)
 	{
 		this.xml = xmlResponse;
