@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import twilio.client.DialStatus;
+import twilio.client.SmsStatus;
 import twilio.client.TranscriptionStatus;
 import twilio.markup.Conference;
 import twilio.markup.Constants;
@@ -306,6 +307,10 @@ public abstract class TwilioServlet extends HttpServlet
 			getHttpServletResponse().setContentType("text/plain");
 			getHttpServletResponse().setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
+		else if (req.isSmsCallback())
+		{
+			onSmsCallback(req, req.getSmsSid(), req.getSmsStatus());
+		}
 		else if (req.isRecordCallback())
 		{
 			onRecordCallback(req, req.getRecordingUrl());
@@ -339,6 +344,10 @@ public abstract class TwilioServlet extends HttpServlet
 			writeTwilioResponse(getTwilioResponse());
 		}
 	}
+
+	abstract protected void onSmsCallback(TwilioRequest req, 
+								String smsSid,
+								SmsStatus smsStatus);
 
 	protected boolean verifyRequest(TwilioRequest req)
 	{
