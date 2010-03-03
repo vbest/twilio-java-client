@@ -17,6 +17,13 @@ public class MarkupTest extends TestCase
 		
 		rsp.add(dial);
 		
+		Sms sms = new Sms();
+		sms.setFrom("503-111-2222");
+		sms.setTo("503-222-3333");
+		sms.setMessage("This is a message!");
+		
+		rsp.add(sms);
+		
 		Play play = new Play();
 		play.setUrl("http://www.foo.com/music.mp3");
 		play.setLoop(1);
