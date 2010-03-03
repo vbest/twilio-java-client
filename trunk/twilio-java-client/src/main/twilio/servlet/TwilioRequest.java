@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import twilio.client.CallStatus;
 import twilio.client.DialStatus;
 import twilio.client.RecordingFormat;
+import twilio.client.SmsStatus;
 import twilio.client.TranscriptionStatus;
 
 public class TwilioRequest extends HttpServletRequestWrapper
@@ -187,6 +188,21 @@ public class TwilioRequest extends HttpServletRequestWrapper
 	public boolean isTranscribeCallback()
 	{
 		return (getTranscriptionStatusParameter() != null);
+	}
+
+	public String getSmsSid()
+	{
+		return this.getParameter("SmsSid");
+	}
+	
+	public SmsStatus getSmsStatus()
+	{
+		return SmsStatus.getSmsStatus(this.getParameter("SmsStatus"));
+	}
+	
+	public boolean isSmsCallback()
+	{
+		return (getSmsSid() != null);
 	}
 	
 	public boolean isGet()
