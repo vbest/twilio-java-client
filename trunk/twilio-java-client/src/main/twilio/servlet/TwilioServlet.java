@@ -309,7 +309,7 @@ public abstract class TwilioServlet extends HttpServlet
 		}
 		else if (req.isSmsCallback())
 		{
-			onSmsCallback(req, req.getSmsSid(), req.getSmsStatus());
+			onInboundSms(req, req.getSmsSid(), req.getSmsStatus());
 		}
 		else if (req.isRecordCallback())
 		{
@@ -345,10 +345,6 @@ public abstract class TwilioServlet extends HttpServlet
 		}
 	}
 
-	abstract protected void onSmsCallback(TwilioRequest req, 
-								String smsSid,
-								SmsStatus smsStatus);
-
 	protected boolean verifyRequest(TwilioRequest req)
 	{
 		return SecurityUtil.verifyRequest(req, getTwilioAuthToken());
@@ -380,6 +376,10 @@ public abstract class TwilioServlet extends HttpServlet
 		
 	}
 
+	abstract protected void onInboundSms(TwilioRequest req, 
+										String smsSid,
+										SmsStatus smsStatus);
+	
 	abstract protected void onRecordCallback(TwilioRequest req, String recordingUrl);
 
 	abstract protected void onInboundCall(TwilioRequest req, String caller, String called);
