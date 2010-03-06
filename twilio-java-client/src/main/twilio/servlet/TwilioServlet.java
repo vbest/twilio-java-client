@@ -307,9 +307,13 @@ public abstract class TwilioServlet extends HttpServlet
 			getHttpServletResponse().setContentType("text/plain");
 			getHttpServletResponse().setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
-		else if (req.isSmsCallback())
+		else if (req.isSmsReceivedCallback())
 		{
-			onInboundSms(req, req.getSmsSid(), req.getSmsStatus());
+			onSmsReceived(req, 
+							req.getSmsSid(), 
+							req.getFrom(), 
+							req.getTo(), 
+							req.getSmsBody());
 		}
 		else if (req.isRecordCallback())
 		{
@@ -376,7 +380,18 @@ public abstract class TwilioServlet extends HttpServlet
 		
 	}
 
-	abstract protected void onInboundSms(TwilioRequest req, 
+	/**
+	 * 
+	 *  use this method to process an inbound SMS message
+	 *  
+	 */
+	abstract protected void onSmsReceived(TwilioRequest req, 
+										String smsSid,
+										String from,
+										String to,
+										String messageBody);
+	
+	abstract protected void onSmsStatus(TwilioRequest req,
 										String smsSid,
 										SmsStatus smsStatus);
 	
