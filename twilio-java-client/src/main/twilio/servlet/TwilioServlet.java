@@ -27,6 +27,7 @@ import twilio.markup.Record;
 import twilio.markup.Redirect;
 import twilio.markup.Response;
 import twilio.markup.Say;
+import twilio.markup.Sms;
 import twilio.markup.Verb;
 import twilio.markup.Voice;
 
@@ -281,6 +282,11 @@ public abstract class TwilioServlet extends HttpServlet
 		return add(d);
 	}
 	
+	protected Response sms(String from, String to, String messageBody)
+	{
+		Sms sms = new Sms();
+		return add(sms);
+	}
 	protected Response play(CharSequence url, int loop)
 	{
 		
