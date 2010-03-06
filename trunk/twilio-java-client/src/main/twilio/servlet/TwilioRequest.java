@@ -219,4 +219,25 @@ public class TwilioRequest extends HttpServletRequestWrapper
 	{
 		return ServletUtil.toString(this);
 	}
+
+	public String getFrom()
+	{
+		return this.getParameter("From");
+	}
+
+
+	public String getTo()
+	{
+		return this.getParameter("To");
+	}
+
+	public String getSmsBody()
+	{
+		return this.getParameter("Body");
+	}
+	
+	public String getAccountSid()
+	{
+		return this.getParameter("AccountSid");
+	}
 }
