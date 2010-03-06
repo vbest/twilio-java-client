@@ -200,9 +200,11 @@ public class TwilioRequest extends HttpServletRequestWrapper
 		return SmsStatus.getSmsStatus(this.getParameter("SmsStatus"));
 	}
 	
-	public boolean isSmsCallback()
+	public boolean isSmsReceivedCallback()
 	{
-		return (getSmsSid() != null);
+		return (getSmsSid() != null) 
+				&& (getSmsBody() != null)
+				&& ("received".equalsIgnoreCase(getParameter("SmsStatus")));
 	}
 	
 	public boolean isGet()
