@@ -285,6 +285,9 @@ public abstract class TwilioServlet extends HttpServlet
 	protected Response sms(String from, String to, String messageBody)
 	{
 		Sms sms = new Sms();
+		sms.setFrom(from);
+		sms.setTo(to);
+		sms.setMessage(messageBody);
 		return add(sms);
 	}
 	protected Response play(CharSequence url, int loop)
