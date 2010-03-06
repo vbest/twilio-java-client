@@ -9,19 +9,18 @@ public class Sms extends Verb
 {
 	private String message;
 	
+	@XStreamAsAttribute
 	private String from;
 	
+	@XStreamAsAttribute
 	private String to;
 	
-	@XStreamAlias("action")
 	@XStreamAsAttribute
 	private String action;
 
-	@XStreamAlias("statusCallback")
 	@XStreamAsAttribute
 	private String statusCallback;
 
-	@XStreamAlias("method")
 	@XStreamAsAttribute
 	private String httpMethod = Constants.DEFAULT_HTTP_METHOD;
 
@@ -40,9 +39,9 @@ public class Sms extends Verb
 		return message;
 	}
 
-	public void setMessage(String message)
+	public void setMessage(String msg)
 	{
-		this.message = message;
+		this.message = msg;
 	}
 
 	public String getFrom()
