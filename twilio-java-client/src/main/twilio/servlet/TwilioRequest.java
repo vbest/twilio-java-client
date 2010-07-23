@@ -242,4 +242,10 @@ public class TwilioRequest extends HttpServletRequestWrapper
 	{
 		return this.getParameter("AccountSid");
 	}
+
+	public boolean isCallCompleted()
+	{
+		return (this.getParameter("CallStatus") != null)
+				&& ("completed".equals(this.getParameter("CallStatus")));
+	}
 }
