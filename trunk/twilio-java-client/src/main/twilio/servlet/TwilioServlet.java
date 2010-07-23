@@ -316,6 +316,10 @@ public abstract class TwilioServlet extends HttpServlet
 			getHttpServletResponse().setContentType("text/plain");
 			getHttpServletResponse().setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
+		else if (req.isCallCompleted())
+		{
+			onCallCompleted(req);
+		}
 		else if (req.isSmsReceivedCallback())
 		{
 			onSmsReceived(req, 
@@ -408,6 +412,11 @@ public abstract class TwilioServlet extends HttpServlet
 
 	abstract protected void onInboundCall(TwilioRequest req, String caller, String called);
 
+	protected void onCallCompleted(TwilioRequest req)
+	{
+		// do nothing
+	}
+	
 	abstract protected void onGatherCallback(TwilioRequest req, String digits);
 
 	abstract protected void onDialCallback(TwilioRequest req, DialStatus status);
